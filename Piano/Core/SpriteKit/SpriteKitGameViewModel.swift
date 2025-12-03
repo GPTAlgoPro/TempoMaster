@@ -14,6 +14,7 @@ final class SpriteKitGameViewModel: ObservableObject {
     @Published var gameCompleted: Bool = false  // 新增：游戏完成状态
     
     // MARK: - 私有属性
+    private var hasEndedGame: Bool = false  // 防止重复调用 endGame
     private let song: Song
     private let mode: GameMode
     private var gameState = GameStateManager.shared
@@ -51,10 +52,11 @@ final class SpriteKitGameViewModel: ObservableObject {
         gameState.startGame(song: song, mode: mode)
         isPlaying = true
         isPaused = false
+        hasEndedGame = false  // 重置结束标记，允许新游戏保存记录
         startTime = Date()
         feverMode.reset()
         
-        print("🎮 ViewModel: 游戏开始 - 音符数: \(fallingNotes.count)")
+        print("?? ViewModel: 游戏开始 - 音符数: \(fallingNotes.count)")
     }
     
     /// 暂停游戏
@@ -75,8 +77,15 @@ final class SpriteKitGameViewModel: ObservableObject {
     func stopGame() {
         isPlaying = false
         isPaused = false
-        gameState.endGame()
-        print("🏁 ViewModel: 游戏结束")
+        
+        // 只在未保存记录时调用 endGame
+        if !hasEndedGame {
+            gameState.endGame()
+            hasEndedGame = true
+            print("🏁 ViewModel: 游戏结束")
+        } else {
+            print("⚠️ ViewModel: 游戏已结束，跳过重复保存")
+        }
     }
     
     /// 退出游戏（不保存）
@@ -188,10 +197,14 @@ final class SpriteKitGameViewModel: ObservableObject {
         isPaused = false
         gameCompleted = true  // 标记游戏完成
         
-        // 保存游戏记录
-        gameState.endGame()
-        
-        print("🎊 游戏完成！最终得分: \(gameState.currentScore)")
+        // 保存游戏记录（只保存一次）
+        if !hasEndedGame {
+            gameState.endGame()
+            hasEndedGame = true
+            print("🎊 游戏完成！最终得分: \(gameState.currentScore)")
+        } else {
+            print("⚠️ 游戏已保存记录，跳过重复保存")
+        }
         
         // 即时触发游戏完成回调，避免用户等待
         onGameCompleted?()

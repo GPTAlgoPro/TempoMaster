@@ -83,13 +83,9 @@ final class AudioManager: ObservableObject {
         
         // 2. 确保音频引擎处于完全停止状态
         if audioEngine.isRunning {
-            do {
-                audioEngine.stop()
-                isEngineRunning = false
-                print("✅ 音频引擎已停止")
-            } catch {
-                print("❌ 音频引擎停止失败: \(error.localizedDescription)")
-            }
+            audioEngine.stop()
+            isEngineRunning = false
+            print("✅ 音频引擎已停止")
         }
         
         // 3. 重置音频引擎连接
@@ -120,13 +116,8 @@ final class AudioManager: ObservableObject {
         
         // 确保音频引擎完全停止
         if audioEngine.isRunning {
-            do {
-                audioEngine.stop()
-                isEngineRunning = false
-            } catch {
-                print("❌ 音频引擎停止失败: \(error.localizedDescription)")
-                return false
-            }
+            audioEngine.stop()
+            isEngineRunning = false
         }
         
         // 重置所有连接和节点

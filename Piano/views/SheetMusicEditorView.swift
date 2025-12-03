@@ -5,13 +5,25 @@ struct SheetMusicEditorView: View {
     @StateObject private var gameState = GameStateManager.shared
     @Environment(\.dismiss) private var dismiss
     
-    @State private var songName = ""
-    @State private var bpm = 120
-    @State private var sheetMusicText = ""
+    @State private var songName = "" {
+        didSet { saveDraftToFile() }
+    }
+    @State private var bpm = 120 {
+        didSet { saveDraftToFile() }
+    }
+    @State private var sheetMusicText = "" {
+        didSet { saveDraftToFile() }
+    }
     @State private var showValidationError = false
     @State private var validationMessage = ""
     @State private var showPreview = false
     @State private var previewSong: Song?
+    
+    // 临时文件路径
+    private var draftFilePath: URL {
+        FileManager.default.temporaryDirectory
+            .appendingPathComponent("sheet_music_draft.json")
+    }
     
     var body: some View {
         NavigationView {
@@ -63,9 +75,7 @@ struct SheetMusicEditorView: View {
                 Text(validationMessage)
             }
             .sheet(isPresented: $showPreview) {
-                if let song = previewSong {
-                    SheetMusicPreviewView(song: song)
-                }
+                SheetMusicPreviewView(draftFilePath: draftFilePath)
             }
         }
     }
@@ -334,6 +344,9 @@ struct SheetMusicEditorView: View {
     }
     
     private func validateAndPreview() {
+        // 确保最新数据已保存到文件
+        saveDraftToFile()
+        
         // 验证格式
         let validation = SheetMusicParser.validate(sheetMusic: sheetMusicText)
         
@@ -343,19 +356,52 @@ struct SheetMusicEditorView: View {
             return
         }
         
-        // 解析简谱
-        guard let song = SheetMusicParser.parse(
+        // 简单验证能否解析（不实际使用）
+        guard SheetMusicParser.parse(
             sheetMusic: sheetMusicText,
             name: songName.isEmpty ? "未命名" : songName,
             bpm: bpm
-        ) else {
+        ) != nil else {
             validationMessage = "简谱解析失败，请检查格式"
             showValidationError = true
             return
         }
         
-        previewSong = song
+        // 直接显示预览，让预览视图自己从文件加载
         showPreview = true
+    }
+    
+    /// 保存草稿到临时文件
+    private func saveDraftToFile() {
+        let draft: [String: Any] = [
+            "songName": songName,
+            "bpm": bpm,
+            "sheetMusicText": sheetMusicText
+        ]
+        
+        guard let data = try? JSONSerialization.data(withJSONObject: draft, options: .prettyPrinted) else {
+            return
+        }
+        
+        try? data.write(to: draftFilePath, options: .atomic)
+    }
+    
+    /// 从临时文件加载草稿
+    private func loadDraftFromFile() {
+        guard let data = try? Data(contentsOf: draftFilePath),
+              let draft = try? JSONSerialization.jsonObject(with: data) as? [String: Any] else {
+            return
+        }
+        
+        if let name = draft["songName"] as? String {
+            songName = name
+        }
+        if let tempo = draft["bpm"] as? Int {
+            bpm = tempo
+        }
+        if let text = draft["sheetMusicText"] as? String {
+            sheetMusicText = text
+        }
     }
     
     private func saveCustomSong() {
@@ -405,43 +451,61 @@ struct SheetMusicEditorView: View {
 
 /// 简谱预览视图
 struct SheetMusicPreviewView: View {
-    let song: Song
+    let draftFilePath: URL
     @Environment(\.dismiss) private var dismiss
+    @State private var song: Song?
+    @State private var errorMessage: String?
     
     var body: some View {
         NavigationView {
             ZStack {
                 Color.black.ignoresSafeArea()
                 
-                ScrollView {
-                    VStack(spacing: 16) {
-                        Text("共 \(song.notes.count) 个音符")
-                            .font(.system(size: 14, design: .rounded))
-                            .foregroundStyle(.white.opacity(0.7))
-                        
-                        LazyVGrid(columns: Array(repeating: GridItem(.flexible(), spacing: 8), count: 8), spacing: 8) {
-                            ForEach(Array(song.notes.enumerated()), id: \.offset) { index, noteIndex in
-                                VStack(spacing: 4) {
-                                    Text("♪")
-                                        .font(.system(size: 20))
-                                        .foregroundStyle(Note.allNotes[noteIndex].color)
-                                    
-                                    Text(Note.allNotes[noteIndex].name)
-                                        .font(.system(size: 12, weight: .medium, design: .rounded))
-                                        .foregroundStyle(.white)
+                if let song = song {
+                    ScrollView {
+                        VStack(spacing: 16) {
+                            Text("共 \(song.notes.count) 个音符")
+                                .font(.system(size: 14, design: .rounded))
+                                .foregroundStyle(.white.opacity(0.7))
+                            
+                            LazyVGrid(columns: Array(repeating: GridItem(.flexible(), spacing: 8), count: 8), spacing: 8) {
+                                ForEach(Array(song.notes.enumerated()), id: \.offset) { index, noteIndex in
+                                    VStack(spacing: 4) {
+                                        Text("♪")
+                                            .font(.system(size: 20))
+                                            .foregroundStyle(Note.allNotes[noteIndex].color)
+                                        
+                                        Text(Note.allNotes[noteIndex].name)
+                                            .font(.system(size: 12, weight: .medium, design: .rounded))
+                                            .foregroundStyle(.white)
+                                    }
+                                    .frame(width: 40, height: 60)
+                                    .background(
+                                        RoundedRectangle(cornerRadius: 8)
+                                            .fill(.white.opacity(0.1))
+                                    )
                                 }
-                                .frame(width: 40, height: 60)
-                                .background(
-                                    RoundedRectangle(cornerRadius: 8)
-                                        .fill(.white.opacity(0.1))
-                                )
                             }
+                            .padding()
                         }
-                        .padding()
                     }
+                } else if let errorMessage = errorMessage {
+                    VStack(spacing: 16) {
+                        Image(systemName: "exclamationmark.triangle.fill")
+                            .font(.system(size: 48))
+                            .foregroundStyle(.red)
+                        Text(errorMessage)
+                            .font(.system(size: 16, design: .rounded))
+                            .foregroundStyle(.white)
+                            .multilineTextAlignment(.center)
+                            .padding()
+                    }
+                } else {
+                    ProgressView()
+                        .tint(.white)
                 }
             }
-            .navigationTitle(song.name)
+            .navigationTitle(song?.name ?? "加载中...")
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
                 ToolbarItem(placement: .navigationBarTrailing) {
@@ -451,6 +515,33 @@ struct SheetMusicPreviewView: View {
                     .foregroundStyle(.white)
                 }
             }
+            .onAppear {
+                loadSongFromDraft()
+            }
         }
+    }
+    
+    /// 从临时文件加载并解析歌曲
+    private func loadSongFromDraft() {
+        guard let data = try? Data(contentsOf: draftFilePath),
+              let draft = try? JSONSerialization.jsonObject(with: data) as? [String: Any],
+              let songName = draft["songName"] as? String,
+              let bpm = draft["bpm"] as? Int,
+              let sheetMusicText = draft["sheetMusicText"] as? String else {
+            errorMessage = "无法加载草稿数据"
+            return
+        }
+        
+        // 解析简谱
+        guard let parsedSong = SheetMusicParser.parse(
+            sheetMusic: sheetMusicText,
+            name: songName.isEmpty ? "未命名" : songName,
+            bpm: bpm
+        ) else {
+            errorMessage = "简谱解析失败"
+            return
+        }
+        
+        self.song = parsedSong
     }
 }

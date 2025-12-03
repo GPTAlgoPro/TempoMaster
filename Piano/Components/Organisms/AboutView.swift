@@ -161,11 +161,11 @@ struct AboutView: View {
                     .font(.system(size: 32, weight: .bold, design: .rounded))
                     .foregroundStyle(.white)
                 
-                Text("Piano Keyboard")
+                Text("TempoMaster")
                     .font(.system(size: 16, weight: .medium, design: .rounded))
                     .foregroundStyle(.white.opacity(0.7))
                 
-                Text("Version 2.0.0")
+                Text("Version 1.0.0")
                     .font(.system(size: 14, weight: .regular, design: .monospaced))
                     .foregroundStyle(.white.opacity(0.5))
             }
@@ -236,11 +236,11 @@ struct AboutView: View {
     private var overviewSection: some View {
         VStack(spacing: 20) {
             VStack(spacing: 16) {
-                Text("🎹 优雅的钢琴演奏体验")
+                Text("🎹 优雅的演奏体验")
                     .font(.system(size: 18, weight: .semibold, design: .rounded))
                     .foregroundStyle(.white)
                 
-                Text("隽婉雅韵为您提供高品质的数字钢琴体验，支持多种音效、主题和游戏模式。")
+                Text("隽婉雅韵为您提供高品质的简易数字电子琴体验，支持多种音效、主题和游戏模式。")
                     .font(.system(size: 14, weight: .regular, design: .rounded))
                     .foregroundStyle(.white.opacity(0.8))
                     .multilineTextAlignment(.center)
@@ -252,7 +252,7 @@ struct AboutView: View {
                 FeatureHighlight(
                     icon: "pianokeys",
                     title: "16键双排键盘",
-                    description: "高音区与低音区分离设计，演奏更专业"
+                    description: "高音区与低音区分离设计，简洁但专业"
                 )
                 
                 FeatureHighlight(
@@ -270,7 +270,7 @@ struct AboutView: View {
                 FeatureHighlight(
                     icon: "gamecontroller",
                     title: "节奏游戏模式",
-                    description: "寓教于乐，在游戏中学习钢琴演奏"
+                    description: "寓教于乐，在游戏中学习电子琴演奏"
                 )
             }
         }
@@ -314,12 +314,12 @@ struct AboutView: View {
                     color: .green
                 )
                 
-                FeatureItem(
-                    icon: "cpu",
-                    title: "性能优化",
-                    description: "三种性能模式，适配不同设备需求",
-                    color: .red
-                )
+//                FeatureItem(
+//                    icon: "cpu",
+//                    title: "性能优化",
+//                    description: "三种性能模式，适配不同设备需求",
+//                    color: .red
+//                )
             }
             .padding(.horizontal, 16)
         }
@@ -406,7 +406,7 @@ struct AboutView: View {
                 DeveloperInfoRow(
                     icon: "calendar",
                     label: "更新日期",
-                    value: "2025年12月02日",
+                    value: "2025年12月05日",
                     color: .orange
                 )
                 
@@ -417,12 +417,12 @@ struct AboutView: View {
                     color: .red
                 )
                 
-                DeveloperInfoRow(
-                    icon: "checkmark.seal.fill",
-                    label: "版本特性",
-                    value: "游戏模式 + 性能优化",
-                    color: .blue
-                )
+//                DeveloperInfoRow(
+//                    icon: "checkmark.seal.fill",
+//                    label: "版本特性",
+//                    value: "游戏模式 + 性能优化",
+//                    color: .blue
+//                )
             }
             .padding(.horizontal, 24)
             .padding(.vertical, 16)
