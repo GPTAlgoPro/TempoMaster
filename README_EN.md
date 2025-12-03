@@ -223,7 +223,7 @@ Piano/
 
 ### System Requirements
 
-- iOS 16.0 or higher
+- iOS 17.0 or higher
 - iPhone device
 - Xcode 15.0+ (for developers)
 

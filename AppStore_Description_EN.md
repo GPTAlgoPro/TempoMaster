@@ -8,7 +8,7 @@ English | [简体中文](AppStore_Description.md)
 **Category**: Education  
 **Subcategory**: Music, Children's Education  
 **Price**: Free  
-**Platform**: iOS 16.0+  
+**Platform**: iOS 17.0+  
 **Language**: English, Simplified Chinese  
 **Version**: 1.0.0  
 **Developer**: Kai Sun
@@ -24,6 +24,7 @@ English | [简体中文](AppStore_Description.md)
 ## ✨ App Description
 
 ### One-Sentence Description
+
 TempoMaster is a music enlightenment app created by a father for his daughter, using gamification to help children easily learn jianpu (numbered musical notation) and grow joyfully.
 
 ### App Story
@@ -111,34 +112,42 @@ Children's Music, Jianpu Learning, Music Enlightenment, Electronic Piano, Parent
 ## 📸 App Screenshot Descriptions
 
 ### Screenshot 1 - Main Playing Interface
+
 **Title**: Colorful Keys, Learn While Playing  
 **Description**: Each key has jianpu number labels, children understand at a glance. Real-time note display makes learning more intuitive.
 
 ### Screenshot 2 - Theme Customization
+
 **Title**: 6 Color Schemes, Styles Children Love  
 **Description**: From classic purple-pink to ocean blue, let children choose their favorite color theme to increase learning interest.
 
 ### Screenshot 3 - Children's Song Library
+
 **Title**: Classic Children's Songs, Starting with Twinkle Star  
 **Description**: Twinkle Twinkle Little Star, Two Tigers, Ode to Joy - familiar melodies that give children a sense of achievement.
 
 ### Screenshot 4 - Difficulty Selection
+
 **Title**: 4 Difficulty Levels, Progressive Learning  
 **Description**: From easy to expert, suitable for children of different ages and levels. Parents can choose based on child's situation.
 
 ### Screenshot 5 - Game Experience
+
 **Title**: Gamified Learning, No Longer Boring  
 **Description**: Notes fall from above like a game, children press corresponding keys to score, making learning fun.
 
 ### Screenshot 6 - Game Menu
+
 **Title**: Clear Progress Tracking  
 **Description**: Highest score and achievement count at a glance, letting parents understand children's learning progress anytime.
 
 ### Screenshot 7 - Achievement System
+
 **Title**: 7 Achievements, Motivate Growth  
 **Description**: Every achievement unlocked gives children a sense of accomplishment. Parents can encourage and praise promptly.
 
 ### Screenshot 8 - Leaderboard
+
 **Title**: Record Every Improvement  
 **Description**: Detailed record of every game score, witness children's growth journey from C grade to SSS grade.
 
@@ -175,15 +184,19 @@ If this app can also help your child, please give us reviews and suggestions. Ev
 ## 📧 Support Information
 
 ### Privacy Policy URL
+
 https://github.com/GPTAlgoPro/TempoMaster/blob/main/PRIVACY.md
 
-### Support URL  
+### Support URL
+
 https://github.com/GPTAlgoPro/TempoMaster/issues
 
 ### Marketing URL
+
 https://github.com/GPTAlgoPro/TempoMaster
 
 ### Copyright Information
+
 © 2025 Kai Sun. All rights reserved.
 
 ---
@@ -234,18 +247,23 @@ Narration: "TempoMaster, let children fall in love with music in happiness"
 ## 💬 Customer Service Reply Templates
 
 ### Thank You for Positive Review
+
 "Thank you so much for your review and support! 💝 As an app developed by a father for his daughter, being able to help more children learn music is my greatest comfort. If you have any suggestions, feel free to tell me anytime! Wish your child learning progress!"
 
 ### Parent Inquiries
+
 "Thank you for your attention to TempoMaster! About your question: [specific answer]. This app was developed for my daughter Juanwan to learn jianpu, and I will continue to optimize it to make it more suitable for children. If you have other questions, contact me anytime!"
 
 ### Problem Feedback
+
 "Very sorry for the inconvenience to you and your child! I have recorded this issue and will fix it as soon as possible. This is an app I personally develop and maintain, so response may not be timely enough, please understand. Thank you for your patience and support!"
 
 ### Feature Suggestions
+
 "Thank you so much for your suggestion! 🙏 As a father, I value feedback from parents and children very much. [Feature name] is indeed a good idea, and I will seriously consider implementing it in future versions. Your suggestions make this app better!"
 
 ### Encourage Reviews
+
 "So happy to hear your child likes this app! ?? This is my original purpose for developing it. If convenient, could you please leave a review? This will help more parents discover this app and benefit more children. Thank you!"
 
 ---
@@ -253,22 +271,27 @@ Narration: "TempoMaster, let children fall in love with music in happiness"
 ## 📊 Market Positioning
 
 ### Target Users
+
 - **Core Users**: 3-10 year old children and their parents
 - **Secondary Users**: Music enlightenment educators
 - **Usage Scenarios**: Home music enlightenment, parent-child interaction time, children's leisure entertainment
 
 ### Core Advantages
+
 **Emotional Connection**:
+
 - Real father's love story, resonates with parents
 - Specially designed for children, not adapted from adult apps
 - Developer is a parent himself, better understands parent needs
 
 **Educational Value**:
+
 - Focus on jianpu learning, clear goals
 - Gamified design fits children's cognitive patterns
 - Progressive, suitable for children with zero foundation
 
 **User Trust**:
+
 - Completely free, no hidden charges
 - Open source and transparent, code can be checked
 - Local storage, protects children's privacy
@@ -278,6 +301,7 @@ Narration: "TempoMaster, let children fall in love with music in happiness"
 ## 🎨 App Store Assets Checklist
 
 ### Required Assets
+
 - ✅ App Icon (1024x1024)
 - ✅ 8 App Screenshots (iPhone compatible sizes)
 - ✅ App Preview Video (optional, recommended)
@@ -285,6 +309,7 @@ Narration: "TempoMaster, let children fall in love with music in happiness"
 - ✅ Support Page
 
 ### Recommended Assets
+
 - 📱 App Demo GIF
 - 🎬 Feature Introduction Video
 - 📄 Parent User Guide
@@ -295,6 +320,7 @@ Narration: "TempoMaster, let children fall in love with music in happiness"
 ## 🚀 Release Checklist
 
 ### Technical Preparation
+
 - [ ] iOS app signing configured
 - [ ] Version number and build number set
 - [ ] App icon and launch screen
@@ -304,6 +330,7 @@ Narration: "TempoMaster, let children fall in love with music in happiness"
 - [ ] Crash testing complete
 
 ### Content Preparation
+
 - [ ] App description copy reviewed
 - [ ] Keywords optimized
 - [ ] iPhone screenshots ready
@@ -312,6 +339,7 @@ Narration: "TempoMaster, let children fall in love with music in happiness"
 - [ ] Version update description written
 
 ### Submission Preparation
+
 - [ ] App Store Connect account
 - [ ] App store information filled
 - [ ] Pricing set (Free)
