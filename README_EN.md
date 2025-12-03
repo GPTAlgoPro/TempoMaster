@@ -1,4 +1,4 @@
-# TempoMaster - Juanwan Yayun (隽婉雅韵)
+# TempoMaster - Junwan Yayun (隽婉雅韵)
 
 English | [简体中文](README.md)
 
