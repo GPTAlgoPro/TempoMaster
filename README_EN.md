@@ -23,7 +23,7 @@ English | [简体中文](README.md)
 
 This app was born from a father's love for his daughter.
 
-To help my daughter **Juanwan** learn musical notation (jianpu), I developed this edutainment piano app. The name "Juanwan Yayun" (隽婉雅韵) is both an affectionate reference to my daughter and represents a beautiful vision for music education—letting children learn and grow joyfully through elegant melodies.
+To help my daughter **Junwan** learn musical notation (jianpu), I developed this edutainment piano app. The name "Juanwan Yayun" (隽婉雅韵) is both an affectionate reference to my daughter and represents a beautiful vision for music education—letting children learn and grow joyfully through elegant melodies.
 
 > "Music is the best gift, and companionship is the longest confession of love."
 
