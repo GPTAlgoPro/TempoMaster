@@ -4,7 +4,7 @@
 
 <div align="center">
 
-![App Icon](Piano/Assets.xcassets/AppIcon.appiconset/piano-flat.jpg)
+<img src="Piano/Assets.xcassets/AppIcon.appiconset/piano-flat.jpg" title="" alt="App Icon" width="276">
 
 **为爱而生的音乐启蒙应用 · 让孩子在游戏中爱上简谱**
 
@@ -47,35 +47,43 @@
 ## 📱 应用截图
 
 ### 主演奏界面
+
 <div align="center">
 <img src="docs/screenshots/1.jpg" alt="主演奏界面" width="300"/>
 
 *彩色琴键 + 音符显示，边玩边学简谱*
+
 </div>
 
 ### 主题与曲库
+
 <div align="center">
 <img src="docs/screenshots/2.jpg" alt="主题设置" width="300"/>
 <img src="docs/screenshots/3.jpg" alt="曲目选择" width="300"/>
 
 *6种配色主题 | 经典儿歌曲库*
+
 </div>
 
 ### 游戏模式
+
 <div align="center">
-<img src="docs/screenshots/6.jpg" alt="游戏菜单" width="300"/>
-<img src="docs/screenshots/4.jpg" alt="难度选择" width="300"/>
-<img src="docs/screenshots/5.jpg" alt="游戏中" width="300"/>
+<img src="docs/screenshots/6.jpg" alt="游戏菜单" width="200"/>
+<img src="docs/screenshots/4.jpg" alt="难度选择" width="200"/>
+<img src="docs/screenshots/5.jpg" alt="游戏中" width="200"/>
 
 *趣味游戏化学习：4个难度等级适配不同水平*
+
 </div>
 
 ### 成就与排行
+
 <div align="center">
 <img src="docs/screenshots/7.jpg" alt="成就系统" width="300"/>
 <img src="docs/screenshots/8.jpg" alt="排行榜" width="300"/>
 
 *记录成长轨迹，见证进步时刻*
+
 </div>
 
 ---
@@ -85,12 +93,14 @@
 ### 🎹 演奏学习模式
 
 #### 简谱启蒙设计
+
 - **彩色音符标识**：每个琴键配有简谱数字（1-7、i）
 - **实时音符显示**：演奏时显示对应的简谱符号
 - **双排键盘布局**：高低音分离，音域清晰
 - **一键演奏**：播放示例曲目，跟着学习
 
 #### 儿歌曲库
+
 - 🌟 **小星星** - 最经典的启蒙曲目
 - 🐯 **两只老虎** - 朗朗上口的儿歌
 - 🎵 **欢乐颂** - 提升进阶水平
@@ -101,12 +111,14 @@
 让学习变成游戏，让枯燥变得有趣！
 
 #### 4个难度等级
+
 - 🟢 **简单** - 音符下落慢，适合刚入门的孩子
 - 🟡 **普通** - 节奏适中，巩固基础
 - 🟠 **困难** - 挑战反应速度
 - 🔴 **专家** - 高手进阶之路
 
 #### 成就激励系统
+
 - 🌟 **初次挑战** - 完成第一次游戏
 - 🔥 **完美十连** - 连续10次Perfect
 - ⚡ **连击大师** - 达成50连击
@@ -117,6 +129,7 @@
 ### 🎨 个性化主题
 
 6种配色方案，让孩子选择自己喜欢的风格：
+
 - 经典紫粉、海洋蓝、日落橙、森林绿、宝石红、随机配色
 
 ### 🔊 音效增强
@@ -184,18 +197,21 @@ Piano/
 ### 核心特性实现
 
 #### 音频系统
+
 - **AVAudioEngine** - 音频处理引擎
 - **AVAudioPlayerNode** - 多音轨同步播放
 - **AVAudioUnitReverb/Delay/Distortion** - 实时音效处理
 - **低延迟设计** - 优化的音频缓冲配置
 
 #### 游戏引擎
+
 - **SpriteKit Scene** - 高性能 2D 渲染
 - **物理引擎集成** - 流畅的音符下落动画
 - **碰撞检测** - 精确的判定系统
 - **粒子系统** - 华丽的视觉特效
 
 #### 状态管理
+
 - **Combine Framework** - 响应式数据流
 - **ObservableObject** - MVVM 架构
 - **@Published** - 自动 UI 更新
@@ -207,24 +223,27 @@ Piano/
 
 ### 系统要求
 
-- iOS 16.0 或更高版本
+- iOS 17.0 或更高版本
 - iPhone 设备
 - Xcode 15.0+（开发者）
 
 ### 安装运行
 
 1. **克隆仓库**
-```bash
-git clone https://github.com/GPTAlgoPro/TempoMaster.git
-cd TempoMaster
-```
+   
+   ```bash
+   git clone https://github.com/GPTAlgoPro/TempoMaster.git
+   cd TempoMaster
+   ```
 
 2. **打开项目**
-```bash
-open Piano.xcodeproj
-```
+   
+   ```bash
+   open Piano.xcodeproj
+   ```
 
 3. **运行应用**
+   
    - 连接 iPhone 设备或使用模拟器
    - 选择目标设备
    - 点击运行 (⌘R)
@@ -236,12 +255,14 @@ open Piano.xcodeproj
 ### 给家长的话
 
 **循序渐进**：
+
 1. 先让孩子认识彩色琴键和对应的简谱数字
 2. 播放示例曲目，让孩子跟着旋律点击
 3. 从"简单"难度开始游戏模式
 4. 每天练习15-20分钟，保持兴趣
 
 **鼓励为主**：
+
 - 关注成就系统，及时表扬孩子的进步
 - 不要强求分数，重在培养兴趣
 - 和孩子一起玩，增进亲子关系
@@ -254,20 +275,24 @@ open Piano.xcodeproj
 **第四周**：自由练习 → 冲击高分
 
 ---
+
 ## 🎯 未来计划
 
 ### v1.0.0（当前版本）
+
 - ✅ 基础简谱学习功能
 - ✅ 3首经典儿歌
 - ✅ 游戏化学习模式
 - ✅ 成就激励系统
 
 ### v1.1.0（计划中）
+
 - 🔄 更多儿歌曲库（10+首）
 - 🔄 练习模式：慢速跟弹
 - 🔄 家长模式：学习报告
 
 ### v2.0.0（构想中）
+
 - 🔄 iCloud 同步进度
 - 🔄 iPad 适配大屏体验
 - 🔄 录音分享功能

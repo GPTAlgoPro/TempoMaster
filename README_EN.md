@@ -4,7 +4,7 @@ English | [简体中文](README.md)
 
 <div align="center">
 
-![App Icon](Piano/Assets.xcassets/AppIcon.appiconset/piano-flat.jpg)
+<img title="" src="Piano/Assets.xcassets/AppIcon.appiconset/piano-flat.jpg" alt="App Icon" width="277">
 
 **A Music Learning App Born from a Father's Love · Helping Children Fall in Love with Musical Notation Through Games**
 
@@ -47,50 +47,60 @@ To help my daughter **Juanwan** learn musical notation (jianpu), I developed thi
 ## 📱 Screenshots
 
 ### Main Playing Interface
+
 <div align="center">
 <img src="docs/screenshots/1.jpg" alt="Main Interface" width="300"/>
 
 *Colorful keys + note display, learn while playing*
+
 </div>
 
 ### Themes & Song Library
+
 <div align="center">
 <img src="docs/screenshots/2.jpg" alt="Theme Settings" width="300"/>
 <img src="docs/screenshots/3.jpg" alt="Song Selection" width="300"/>
 
 *6 color themes | Classic children's song library*
+
 </div>
 
 ### Game Mode
+
 <div align="center">
-<img src="docs/screenshots/6.jpg" alt="Game Menu" width="300"/>
-<img src="docs/screenshots/4.jpg" alt="Difficulty Selection" width="300"/>
-<img src="docs/screenshots/5.jpg" alt="Playing Game" width="300"/>
+<img src="docs/screenshots/6.jpg" alt="Game Menu" width="200"/>
+<img src="docs/screenshots/4.jpg" alt="Difficulty Selection" width="200"/>
+<img src="docs/screenshots/5.jpg" alt="Playing Game" width="200"/>
 
 *Fun gamified learning: 4 difficulty levels for different skill levels*
+
 </div>
 
 ### Achievements & Leaderboard
+
 <div align="center">
 <img src="docs/screenshots/7.jpg" alt="Achievement System" width="300"/>
 <img src="docs/screenshots/8.jpg" alt="Leaderboard" width="300"/>
 
 *Track growth journey, witness progress moments*
+
 </div>
 
 ---
 
 ## 🎯 Core Features
 
-### ?? Playing & Learning Mode
+### 🎹 Playing & Learning Mode
 
 #### Jianpu Enlightenment Design
+
 - **Colorful Note Labels**: Each key has jianpu numbers (1-7, i)
 - **Real-time Note Display**: Shows corresponding jianpu symbols while playing
 - **Dual-Row Keyboard Layout**: High and low notes separated, clear pitch range
 - **One-Key Playback**: Play sample songs and learn along
 
 #### Children's Song Library
+
 - 🌟 **Twinkle Twinkle Little Star** - Most classic enlightenment song
 - 🐯 **Two Tigers** - Catchy children's song
 - 🎵 **Ode to Joy** - Advanced level improvement
@@ -101,12 +111,14 @@ To help my daughter **Juanwan** learn musical notation (jianpu), I developed thi
 Turn learning into a game, make boring practice fun!
 
 #### 4 Difficulty Levels
+
 - 🟢 **Easy** - Notes fall slowly, suitable for beginners
 - 🟡 **Normal** - Moderate pace, consolidate basics
 - 🟠 **Hard** - Challenge reaction speed
 - 🔴 **Expert** - Advanced player's path
 
 #### Achievement Motivation System
+
 - 🌟 **First Challenge** - Complete first game
 - ?? **Perfect Ten** - Get 10 consecutive Perfects
 - ⚡ **Combo Master** - Achieve 50 combo
@@ -117,6 +129,7 @@ Turn learning into a game, make boring practice fun!
 ### 🎨 Personalized Themes
 
 6 color schemes, let children choose their favorite style:
+
 - Classic Purple-Pink, Ocean Blue, Sunset Orange, Forest Green, Gem Red, Random Color
 
 ### 🔊 Sound Effect Enhancement
@@ -184,18 +197,21 @@ Piano/
 ### Core Feature Implementation
 
 #### Audio System
+
 - **AVAudioEngine** - Audio processing engine
 - **AVAudioPlayerNode** - Multi-track synchronized playback
 - **AVAudioUnitReverb/Delay/Distortion** - Real-time effect processing
 - **Low Latency Design** - Optimized audio buffer configuration
 
 #### Game Engine
+
 - **SpriteKit Scene** - High-performance 2D rendering
 - **Physics Engine Integration** - Smooth note fall animation
 - **Collision Detection** - Precise judgment system
 - **Particle System** - Gorgeous visual effects
 
 #### State Management
+
 - **Combine Framework** - Reactive data flow
 - **ObservableObject** - MVVM architecture
 - **@Published** - Automatic UI updates
@@ -214,17 +230,20 @@ Piano/
 ### Installation
 
 1. **Clone Repository**
-```bash
-git clone https://github.com/GPTAlgoPro/TempoMaster.git
-cd TempoMaster
-```
+   
+   ```bash
+   git clone https://github.com/GPTAlgoPro/TempoMaster.git
+   cd TempoMaster
+   ```
 
 2. **Open Project**
-```bash
-open Piano.xcodeproj
-```
+   
+   ```bash
+   open Piano.xcodeproj
+   ```
 
 3. **Run App**
+   
    - Connect iPhone device or use simulator
    - Select target device
    - Click Run (⌘R)
@@ -236,12 +255,14 @@ open Piano.xcodeproj
 ### For Parents
 
 **Progressive Learning**:
+
 1. First let children recognize colorful keys and corresponding jianpu numbers
 2. Play sample songs, let children follow the melody
 3. Start with "Easy" difficulty in game mode
 4. Practice 15-20 minutes daily to maintain interest
 
 **Encouragement First**:
+
 - Pay attention to achievement system, praise child's progress promptly
 - Don't force scores, focus on cultivating interest
 - Play together with children, enhance parent-child relationship
@@ -258,17 +279,20 @@ open Piano.xcodeproj
 ## 🎯 Future Plans
 
 ### v1.0.0 (Current Version)
+
 - ✅ Basic jianpu learning function
 - ✅ 3 classic children's songs
 - ✅ Gamified learning mode
 - ✅ Achievement motivation system
 
 ### v1.1.0 (Planned)
+
 - 🔄 More children's song library (10+ songs)
 - 🔄 Practice mode: Slow tempo following
 - 🔄 Parent mode: Learning reports
 
 ### v2.0.0 (Concept)
+
 - 🔄 iCloud progress sync
 - 🔄 iPad large screen adaptation
 - 🔄 Recording sharing function
