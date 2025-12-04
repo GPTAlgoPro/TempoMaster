@@ -4,6 +4,7 @@ import SwiftUI
 struct GameMainView: View {
     @StateObject private var gameState = GameStateManager.shared
     @ObservedObject var audioManager: AudioManager
+    @ObservedObject private var localization = LocalizationManager.shared
     
     @State private var currentView: GameViewState = .menu
     @State private var showEditor = false
@@ -156,11 +157,11 @@ struct GameMainView: View {
                 )
                 .shadow(color: .cyan.opacity(0.5), radius: 20)
             
-            Text("缤纷乐符")
+            Text(localization.localized("game.title"))
                 .font(.system(size: 36, weight: .heavy, design: .rounded))
                 .foregroundStyle(.white)
             
-            Text("节奏游戏模式")
+            Text(localization.localized("game.subtitle"))
                 .font(.system(size: 16, weight: .medium, design: .rounded))
                 .foregroundStyle(.white.opacity(0.7))
         }
@@ -173,21 +174,21 @@ struct GameMainView: View {
                 icon: "star.fill",
                 color: .yellow,
                 value: "\(gameState.gameRecords.map { $0.score }.max() ?? 0)",
-                label: "最高分"
+                label: localization.localized("game.menu.stats.highest")
             )
             
             statBox(
                 icon: "trophy.fill",
                 color: .orange,
                 value: "\(gameState.unlockedAchievementsCount)",
-                label: "成就"
+                label: localization.localized("game.menu.stats.achievements")
             )
             
             statBox(
                 icon: "music.note",
                 color: .cyan,
                 value: "\(Song.allSongs.count + gameState.customSongs.count)",
-                label: "歌曲"
+                label: localization.localized("game.menu.stats.songs")
             )
         }
     }
@@ -218,7 +219,7 @@ struct GameMainView: View {
     // MARK: - 歌曲选择区域
     private var songSelectionSection: some View {
         VStack(alignment: .leading, spacing: 16) {
-            Text("选择歌曲")
+            Text(localization.localized("game.menu.select.song"))
                 .font(.system(size: 20, weight: .bold, design: .rounded))
                 .foregroundStyle(.white)
             
@@ -232,7 +233,7 @@ struct GameMainView: View {
             // 自定义歌曲
             if !gameState.customSongs.isEmpty {
                 HStack {
-                    Text("我的歌曲")
+                    Text(localization.localized("game.menu.my.songs"))
                         .font(.system(size: 16, weight: .bold, design: .rounded))
                         .foregroundStyle(.white.opacity(0.8))
                     
@@ -282,7 +283,7 @@ struct GameMainView: View {
                             .foregroundStyle(.white)
                         
                         HStack(spacing: 8) {
-                            Text("\(song.notes.count) 音符")
+                            Text("\(song.notes.count) " + localization.localized("game.menu.notes"))
                                 .font(.system(size: 12, design: .rounded))
                                 .foregroundStyle(.white.opacity(0.6))
                             
@@ -300,7 +301,7 @@ struct GameMainView: View {
                                 Image(systemName: "crown.fill")
                                     .font(.system(size: 10))
                                     .foregroundStyle(.yellow)
-                                Text("最佳: \(bestRecord.rank) - \(bestRecord.score)")
+                                Text(localization.localized("game.menu.best") + ": \(bestRecord.rank) - \(bestRecord.score)")
                                     .font(.system(size: 11, weight: .medium, design: .rounded))
                                     .foregroundStyle(.yellow)
                             }
@@ -358,7 +359,7 @@ struct GameMainView: View {
                         .foregroundStyle(.white)
                     
                     HStack(spacing: 8) {
-                        Text("\(song.notes.count) 音符")
+                        Text("\(song.notes.count) " + localization.localized("game.menu.notes"))
                             .font(.system(size: 12, design: .rounded))
                             .foregroundStyle(.white.opacity(0.6))
                         
@@ -376,7 +377,7 @@ struct GameMainView: View {
                             Image(systemName: "crown.fill")
                                 .font(.system(size: 10))
                                 .foregroundStyle(.yellow)
-                            Text("最佳: \(bestRecord.rank) - \(bestRecord.score)")
+                            Text(localization.localized("game.menu.best") + ": \(bestRecord.rank) - \(bestRecord.score)")
                                 .font(.system(size: 11, weight: .medium, design: .rounded))
                                 .foregroundStyle(.yellow)
                         }
@@ -407,14 +408,14 @@ struct GameMainView: View {
         VStack(spacing: 12) {
             featureButton(
                 icon: "music.note.list",
-                title: "简谱编辑器",
+                title: localization.localized("game.menu.editor"),
                 color: .purple,
                 action: { showEditor = true }
             )
             
             featureButton(
                 icon: "chart.bar.fill",
-                title: "排行榜与成就",
+                title: localization.localized("game.menu.leaderboard"),
                 color: .orange,
                 action: { showLeaderboard = true }
             )
@@ -478,7 +479,7 @@ struct GameMainView: View {
                         .font(.system(size: 28, weight: .bold, design: .rounded))
                         .foregroundStyle(.white)
                     
-                    Text("选择难度")
+                    Text(localization.localized("game.mode.select.title"))
                         .font(.system(size: 16, design: .rounded))
                         .foregroundStyle(.white.opacity(0.7))
                 }
@@ -499,7 +500,7 @@ struct GameMainView: View {
                             selectedSong = nil
                         }
                     }) {
-                        Text("取消")
+                        Text(localization.localized("game.mode.cancel"))
                             .font(.system(size: 16, weight: .semibold, design: .rounded))
                             .foregroundStyle(.white)
                             .frame(maxWidth: .infinity)
@@ -513,7 +514,7 @@ struct GameMainView: View {
                     Button(action: {
                         startGame(song: song, mode: selectedMode)
                     }) {
-                        Text("开始游戏")
+                        Text(localization.localized("game.mode.start"))
                             .font(.system(size: 16, weight: .semibold, design: .rounded))
                             .foregroundStyle(.white)
                             .frame(maxWidth: .infinity)
@@ -546,7 +547,7 @@ struct GameMainView: View {
                         .font(.system(size: 18, weight: .bold, design: .rounded))
                         .foregroundStyle(.white)
                     
-                    Text("下落速度: \(String(format: "%.1fx", mode.fallSpeed))")
+                    Text(localization.localized("game.mode.fall.speed") + ": \(String(format: "%.1fx", mode.fallSpeed))")
                         .font(.system(size: 14, design: .rounded))
                         .foregroundStyle(.white.opacity(0.6))
                 }

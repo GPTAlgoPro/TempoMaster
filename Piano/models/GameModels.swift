@@ -195,13 +195,13 @@ struct Achievement: Identifiable, Codable {
 // MARK: - 预定义成就
 extension Achievement {
     static let allAchievements: [Achievement] = [
-        Achievement(id: "first_game", title: "初次挑战", description: "完成第一次游戏", icon: "star.fill", isUnlocked: false, progress: 0, requirement: 1),
-        Achievement(id: "perfect_10", title: "完美十连", description: "连续获得10次Perfect", icon: "flame.fill", isUnlocked: false, progress: 0, requirement: 10),
-        Achievement(id: "combo_50", title: "连击大师", description: "达成50连击", icon: "bolt.fill", isUnlocked: false, progress: 0, requirement: 50),
-        Achievement(id: "full_combo", title: "全连击", description: "完成一首歌曲的全连击", icon: "crown.fill", isUnlocked: false, progress: 0, requirement: 1),
-        Achievement(id: "play_100", title: "音乐爱好者", description: "完成100次游戏", icon: "music.note", isUnlocked: false, progress: 0, requirement: 100),
-        Achievement(id: "expert_clear", title: "专家玩家", description: "在专家难度下完成一首歌曲", icon: "trophy.fill", isUnlocked: false, progress: 0, requirement: 1),
-        Achievement(id: "sss_rank", title: "完美无瑕", description: "获得SSS评级", icon: "sparkles", isUnlocked: false, progress: 0, requirement: 1)
+        Achievement(id: "first_game", title: "achievement.first_game.title".localized, description: "achievement.first_game.description".localized, icon: "star.fill", isUnlocked: false, progress: 0, requirement: 1),
+        Achievement(id: "perfect_10", title: "achievement.perfect_10.title".localized, description: "achievement.perfect_10.description".localized, icon: "flame.fill", isUnlocked: false, progress: 0, requirement: 10),
+        Achievement(id: "combo_50", title: "achievement.combo_50.title".localized, description: "achievement.combo_50.description".localized, icon: "bolt.fill", isUnlocked: false, progress: 0, requirement: 50),
+        Achievement(id: "full_combo", title: "achievement.full_combo.title".localized, description: "achievement.full_combo.description".localized, icon: "crown.fill", isUnlocked: false, progress: 0, requirement: 1),
+        Achievement(id: "play_100", title: "achievement.play_100.title".localized, description: "achievement.play_100.description".localized, icon: "music.note", isUnlocked: false, progress: 0, requirement: 100),
+        Achievement(id: "expert_clear", title: "achievement.expert_clear.title".localized, description: "achievement.expert_clear.description".localized, icon: "trophy.fill", isUnlocked: false, progress: 0, requirement: 1),
+        Achievement(id: "sss_rank", title: "achievement.sss_rank.title".localized, description: "achievement.sss_rank.description".localized, icon: "sparkles", isUnlocked: false, progress: 0, requirement: 1)
     ]
 }
 

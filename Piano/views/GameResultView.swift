@@ -7,6 +7,7 @@ struct GameResultView: View {
     let onExit: () -> Void
     
     @ObservedObject private var themeManager = ThemeManager.shared
+    @ObservedObject private var localization = LocalizationManager.shared
     @State private var showStats = false
     @State private var showRank = false
     
@@ -61,7 +62,7 @@ struct GameResultView: View {
     // MARK: - 评级区域
     private var rankSection: some View {
         VStack(spacing: 16) {
-            Text("游戏结束")
+            Text(localization.localized("game.result.title"))
                 .font(.system(size: 24, weight: .semibold, design: .rounded))
                 .foregroundStyle(.white.opacity(0.8))
             
@@ -108,7 +109,7 @@ struct GameResultView: View {
             statRow(
                 icon: "star.fill",
                 color: .yellow,
-                title: "总分",
+                title: localization.localized("game.result.total.score"),
                 value: "\(record.score)"
             )
             
@@ -119,7 +120,7 @@ struct GameResultView: View {
             statRow(
                 icon: "target",
                 color: .green,
-                title: "准确率",
+                title: localization.localized("game.result.accuracy.rate"),
                 value: String(format: "%.1f%%", record.accuracy * 100)
             )
             
@@ -130,7 +131,7 @@ struct GameResultView: View {
             statRow(
                 icon: "bolt.fill",
                 color: .orange,
-                title: "最大连击",
+                title: localization.localized("game.result.max.combo"),
                 value: "\(record.maxCombo)"
             )
         }
@@ -146,7 +147,7 @@ struct GameResultView: View {
     // MARK: - 详细信息区域
     private var detailsSection: some View {
         VStack(spacing: 16) {
-            Text("判定详情")
+            Text(localization.localized("game.result.judgement.title"))
                 .font(.system(size: 18, weight: .bold, design: .rounded))
                 .foregroundStyle(.white)
                 .frame(maxWidth: .infinity, alignment: .leading)
@@ -187,7 +188,7 @@ struct GameResultView: View {
                 HStack {
                     Image(systemName: "arrow.clockwise")
                         .font(.system(size: 20, weight: .semibold))
-                    Text("再来一次")
+                    Text(localization.localized("game.result.play.again"))
                         .font(.system(size: 18, weight: .semibold, design: .rounded))
                 }
                 .foregroundStyle(.white)
@@ -208,7 +209,7 @@ struct GameResultView: View {
                 HStack {
                     Image(systemName: "house.fill")
                         .font(.system(size: 20, weight: .semibold))
-                    Text("返回主界面")
+                    Text(localization.localized("game.result.back.to.menu"))
                         .font(.system(size: 18, weight: .semibold, design: .rounded))
                 }
                 .foregroundStyle(.white)

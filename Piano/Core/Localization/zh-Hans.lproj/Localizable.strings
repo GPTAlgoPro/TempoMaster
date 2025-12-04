@@ -129,3 +129,144 @@
 "tip.swipe.instructions" = "左右滑动查看更多";
 "tip.tap.to.play" = "点击琴键开始演奏";
 "tip.loading.audio" = "正在加载音频资源...";
+
+/* 游戏主视图 - 菜单 */
+"game.menu.stats.highest" = "最高分";
+"game.menu.stats.achievements" = "成就";
+"game.menu.stats.songs" = "歌曲";
+"game.menu.select.song" = "选择歌曲";
+"game.menu.my.songs" = "我的歌曲";
+"game.menu.notes" = "音符";
+"game.menu.best" = "最佳";
+"game.menu.editor" = "简谱编辑器";
+"game.menu.leaderboard" = "排行榜与成就";
+
+/* 游戏主视图 - 难度选择 */
+"game.mode.select.title" = "选择难度";
+"game.mode.fall.speed" = "下落速度";
+"game.mode.cancel" = "取消";
+"game.mode.start" = "开始游戏";
+
+/* 游戏结算视图 */
+"game.result.title" = "游戏结束";
+"game.result.total.score" = "总分";
+"game.result.accuracy.rate" = "准确率";
+"game.result.max.combo" = "最大连击";
+"game.result.judgement.title" = "判定详情";
+"game.result.perfect" = "完美";
+"game.result.good" = "良好";
+"game.result.miss" = "失误";
+"game.result.play.again" = "再来一次";
+"game.result.back.to.menu" = "返回主界面";
+
+/* 简谱编辑器 */
+"editor.close" = "关闭";
+"editor.info.title" = "简谱输入说明";
+"editor.instruction.1" = "1-7 表示 Do Re Mi Fa Sol La Si";
+"editor.instruction.2" = "数字后加点表示高音";
+"editor.instruction.3" = "数字前加逗号表示低音";
+"editor.instruction.4" = "下划线表示延长（一个_延长1拍）";
+"editor.instruction.5" = "0 表示休止符";
+"editor.song.name.label" = "歌曲名称";
+"editor.song.name.placeholder" = "请输入歌曲名称";
+"editor.bpm.label" = "节拍速度 (BPM)";
+"editor.content.label" = "简谱内容";
+"editor.load.example.button" = "加载示例（小星星）";
+"editor.preview.button" = "预览";
+"editor.save.button" = "保存";
+"editor.my.songs.title" = "我的歌曲";
+"editor.no.saved.songs" = "还没有保存的歌曲";
+"editor.validation.error.title" = "格式错误";
+"editor.validation.error.name" = "请输入歌曲名称";
+"editor.validation.error.parse" = "简谱解析失败，请检查格式";
+"editor.preview.loading" = "加载中...";
+"editor.preview.done" = "完成";
+"editor.preview.error.title" = "错误";
+"editor.preview.error.load" = "无法加载草稿数据";
+"editor.preview.error.parse" = "简谱解析失败";
+
+/* 排行榜视图 */
+"leaderboard.tab.rankings" = "排行榜";
+"leaderboard.tab.achievements" = "成就";
+"leaderboard.menu.clear.records" = "清除所有记录";
+"leaderboard.menu.reset.achievements" = "重置所有成就";
+"leaderboard.menu.clear.all" = "清除所有数据";
+"leaderboard.alert.confirm" = "确认清除";
+"leaderboard.alert.cancel" = "取消";
+"leaderboard.alert.confirm.button" = "确认";
+"leaderboard.alert.clear.records" = "确定要清除所有游戏记录吗？此操作不可撤销。";
+"leaderboard.alert.reset.achievements" = "确定要重置所有成就吗？此操作不可撤销。";
+"leaderboard.alert.clear.all" = "确定要清除所有数据吗？包括游戏记录和成就，此操作不可撤销。";
+"leaderboard.stats.plays" = "游戏次数";
+"leaderboard.stats.highest" = "最高分";
+"leaderboard.stats.max.combo" = "最大连击";
+"leaderboard.achievement.progress" = "成就完成度";
+"leaderboard.empty.title" = "暂无记录";
+"leaderboard.empty.message" = "开始游戏来创建你的第一条记录吧！";
+"leaderboard.records.title" = "记录与成就";
+"leaderboard.done" = "完成";
+
+/* 成就名称 */
+"achievement.first_game.title" = "初次挑战";
+"achievement.first_game.description" = "完成第一次游戏";
+"achievement.perfect_10.title" = "完美十连";
+"achievement.perfect_10.description" = "连续获得10次Perfect";
+"achievement.combo_50.title" = "连击大师";
+"achievement.combo_50.description" = "达成50连击";
+"achievement.full_combo.title" = "全连击";
+"achievement.full_combo.description" = "完成一首歌曲的全连击";
+"achievement.play_100.title" = "音乐爱好者";
+"achievement.play_100.description" = "完成100次游戏";
+"achievement.expert_clear.title" = "专家玩家";
+"achievement.expert_clear.description" = "在专家难度下完成一首歌曲";
+"achievement.sss_rank.title" = "完美无瑕";
+"achievement.sss_rank.description" = "获得SSS评级";
+
+/* 歌曲名称 */
+"song.twinkle_star" = "小星星";
+"song.ode_to_joy" = "欢乐颂";
+"song.two_tigers" = "两只老虎";
+"song.twinkle_star_example" = "小星星（示例）";
+
+/* 关于页面 - 总览 */
+"about.overview.subtitle" = "🎹 优雅的演奏体验";
+"about.overview.description" = "隽婉雅韵为您提供高品质的简易数字电子琴体验，支持多种音效、主题和游戏模式。";
+"about.feature.keyboard.title" = "16键双排键盘";
+"about.feature.keyboard.description" = "高音区与低音区分离设计，简洁但专业";
+"about.feature.themes.title" = "6种精美主题";
+"about.feature.themes.description" = "包含经典紫粉、海洋蓝、日落橙等配色";
+"about.feature.effects.title" = "音频效果处理";
+"about.feature.effects.description" = "支持混响、延迟、失真等多种音效";
+"about.feature.game.title" = "节奏游戏模式";
+"about.feature.game.description" = "寓教于乐，在游戏中学习电子琴演奏";
+
+/* 关于页面 - 功能 */
+"about.features.title" = "🎵 功能特性";
+"about.features.songs.title" = "示例曲库";
+"about.features.songs.description" = "内置《小星星》等经典曲目，支持自动播放";
+"about.features.volume.title" = "音量控制";
+"about.features.volume.description" = "精确的音量调节，支持快捷键操作";
+"about.features.audio.title" = "音效系统";
+"about.features.audio.description" = "混响、延迟、失真、合唱四种音效可选";
+"about.features.notation.title" = "记谱法切换";
+"about.features.notation.description" = "支持简谱和五线谱显示模式切换";
+
+/* 关于页面 - 游戏模式 */
+"about.game.title" = "🎮 游戏模式";
+"about.game.name" = "缤纷乐符";
+"about.game.description.full" = "跟随下落的音符，在正确的时机按下对应的琴键。支持多种难度等级和歌曲选择。";
+"about.game.difficulty.title" = "难度系统";
+"about.game.difficulty.description" = "从简单到专家4个难度等级，适合各种水平玩家";
+"about.game.achievement.title" = "成就系统";
+"about.game.achievement.description" = "7项成就，不断挑战自我";
+"about.game.editor.title" = "简谱编辑器";
+"about.game.editor.description" = "使用简谱创建自定义歌曲";
+
+/* 关于页面 - 开发者 */
+"about.developer.title" = "👨‍💻 开发信息";
+"about.developer.team" = "开发团队";
+"about.developer.team.name" = "Comate 团队";
+"about.developer.opensource" = "开源协议";
+"about.developer.opensource.status" = "MIT License";
+"about.developer.feedback" = "反馈渠道";
+"about.developer.feedback.welcome" = "欢迎提出问题和建议";

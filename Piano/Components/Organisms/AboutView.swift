@@ -4,6 +4,7 @@ import SwiftUI
 struct AboutView: View {
     @Binding var isPresented: Bool
     @ObservedObject private var themeManager = ThemeManager.shared
+    @ObservedObject private var localization = LocalizationManager.shared
     @State private var selectedSection: AboutSection = .overview
     
     enum AboutSection: String, CaseIterable {
@@ -245,11 +246,11 @@ struct AboutView: View {
     private var overviewSection: some View {
         VStack(spacing: 20) {
             VStack(spacing: 16) {
-                Text("🎹 优雅的演奏体验")
+                Text(localization.localized("about.overview.subtitle"))
                     .font(.system(size: 18, weight: .semibold, design: .rounded))
                     .foregroundStyle(.white)
                 
-                Text("隽婉雅韵为您提供高品质的简易数字电子琴体验，支持多种音效、主题和游戏模式。")
+                Text(localization.localized("about.overview.description"))
                     .font(.system(size: 14, weight: .regular, design: .rounded))
                     .foregroundStyle(.white.opacity(0.8))
                     .multilineTextAlignment(.center)
@@ -260,26 +261,26 @@ struct AboutView: View {
             VStack(spacing: 12) {
                 FeatureHighlight(
                     icon: "pianokeys",
-                    title: "16键双排键盘",
-                    description: "高音区与低音区分离设计，简洁但专业"
+                    title: localization.localized("about.feature.keyboard.title"),
+                    description: localization.localized("about.feature.keyboard.description")
                 )
                 
                 FeatureHighlight(
                     icon: "paintbrush.pointed",
-                    title: "6种精美主题",
-                    description: "包含经典紫粉、海洋蓝、日落橙等配色"
+                    title: localization.localized("about.feature.themes.title"),
+                    description: localization.localized("about.feature.themes.description")
                 )
                 
                 FeatureHighlight(
                     icon: "sparkles",
-                    title: "音频效果处理",
-                    description: "支持混响、延迟、失真等多种音效"
+                    title: localization.localized("about.feature.effects.title"),
+                    description: localization.localized("about.feature.effects.description")
                 )
                 
                 FeatureHighlight(
                     icon: "gamecontroller",
-                    title: "节奏游戏模式",
-                    description: "寓教于乐，在游戏中学习电子琴演奏"
+                    title: localization.localized("about.feature.game.title"),
+                    description: localization.localized("about.feature.game.description")
                 )
             }
         }
@@ -290,36 +291,36 @@ struct AboutView: View {
     // MARK: - 功能部分
     private var featuresSection: some View {
         VStack(spacing: 16) {
-            Text("🎵 功能特性")
+            Text(localization.localized("about.features.title"))
                 .font(.system(size: 20, weight: .bold, design: .rounded))
                 .foregroundStyle(.white)
             
             VStack(spacing: 12) {
                 FeatureItem(
                     icon: "music.note.list",
-                    title: "示例曲库",
-                    description: "内置《小星星》等经典曲目，支持自动播放",
+                    title: localization.localized("about.features.songs.title"),
+                    description: localization.localized("about.features.songs.description"),
                     color: .purple
                 )
                 
                 FeatureItem(
                     icon: "speaker.wave.3",
-                    title: "音量控制",
-                    description: "精确的音量调节，支持快捷键操作",
+                    title: localization.localized("about.features.volume.title"),
+                    description: localization.localized("about.features.volume.description"),
                     color: .blue
                 )
                 
                 FeatureItem(
                     icon: "waveform.path",
-                    title: "音效系统",
-                    description: "混响、延迟、失真、合唱四种音效可选",
+                    title: localization.localized("about.features.audio.title"),
+                    description: localization.localized("about.features.audio.description"),
                     color: .orange
                 )
                 
                 FeatureItem(
                     icon: "textformat.123",
-                    title: "记谱法切换",
-                    description: "支持简谱和五线谱显示模式切换",
+                    title: localization.localized("about.features.notation.title"),
+                    description: localization.localized("about.features.notation.description"),
                     color: .green
                 )
                 
@@ -338,16 +339,16 @@ struct AboutView: View {
     // MARK: - 游戏模式部分
     private var gameModeSection: some View {
         VStack(spacing: 16) {
-            Text("🎮游戏模式")
+            Text(localization.localized("about.game.title"))
                 .font(.system(size: 20, weight: .bold, design: .rounded))
                 .foregroundStyle(.white)
             
             VStack(spacing: 12) {
-                Text("缤纷乐符")
+                Text(localization.localized("about.game.name"))
                     .font(.system(size: 16, weight: .semibold, design: .rounded))
                     .foregroundStyle(themeManager.colors.primary)
                 
-                Text("跟随下落的音符，在正确的时机按下对应的琴键。支持多种难度等级和歌曲选择。")
+                Text(localization.localized("about.game.description.full"))
                     .font(.system(size: 14, weight: .regular, design: .rounded))
                     .foregroundStyle(.white.opacity(0.8))
                     .multilineTextAlignment(.center)
@@ -356,20 +357,20 @@ struct AboutView: View {
                 VStack(spacing: 8) {
                     GameFeatureRow(
                         icon: "speedometer",
-                        title: "难度等级",
-                        description: "简单、普通、困难三种模式"
-                    )
-                    
-                    GameFeatureRow(
-                        icon: "music.note",
-                        title: "音符下落",
-                        description: "流畅的SpriteKit渲染引擎"
+                        title: localization.localized("about.game.difficulty.title"),
+                        description: localization.localized("about.game.difficulty.description")
                     )
                     
                     GameFeatureRow(
                         icon: "trophy",
-                        title: "排行榜系统",
-                        description: "记录最高分和历史成绩"
+                        title: localization.localized("about.game.achievement.title"),
+                        description: localization.localized("about.game.achievement.description")
+                    )
+                    
+                    GameFeatureRow(
+                        icon: "music.note.list",
+                        title: localization.localized("about.game.editor.title"),
+                        description: localization.localized("about.game.editor.description")
                     )
                 }
             }
@@ -396,7 +397,7 @@ struct AboutView: View {
                     .font(.system(size: 18))
                     .foregroundStyle(themeManager.colors.secondary)
                 
-                Text("开发信息")
+                Text(localization.localized("about.developer.title"))
                     .font(.system(size: 20, weight: .bold, design: .rounded))
                     .foregroundStyle(.white)
                 

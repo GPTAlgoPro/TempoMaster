@@ -3,6 +3,7 @@ import SwiftUI
 /// 简谱编辑器视图
 struct SheetMusicEditorView: View {
     @StateObject private var gameState = GameStateManager.shared
+    @ObservedObject private var localization = LocalizationManager.shared
     @Environment(\.dismiss) private var dismiss
     
     @State private var songName = "" {
@@ -59,18 +60,18 @@ struct SheetMusicEditorView: View {
                     .padding(20)
                 }
             }
-            .navigationTitle("简谱编辑器")
+            .navigationTitle(localization.localized("game.menu.editor"))
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
                 ToolbarItem(placement: .navigationBarLeading) {
-                    Button("关闭") {
+                    Button(localization.localized("editor.close")) {
                         dismiss()
                     }
                     .foregroundStyle(.white)
                 }
             }
-            .alert("格式错误", isPresented: $showValidationError) {
-                Button("确定", role: .cancel) {}
+            .alert(localization.localized("editor.validation.error.title"), isPresented: $showValidationError) {
+                Button(localization.localized("confirm"), role: .cancel) {}
             } message: {
                 Text(validationMessage)
             }
@@ -86,17 +87,17 @@ struct SheetMusicEditorView: View {
             HStack {
                 Image(systemName: "info.circle.fill")
                     .foregroundStyle(.cyan)
-                Text("简谱输入说明")
+                Text(localization.localized("editor.info.title"))
                     .font(.system(size: 16, weight: .bold, design: .rounded))
                     .foregroundStyle(.white)
             }
             
             VStack(alignment: .leading, spacing: 8) {
-                instructionRow("1-7", "表示 Do Re Mi Fa Sol La Si")
-                instructionRow("1. 2.", "数字后加点表示高音")
-                instructionRow(",1 ,2", "数字前加逗号表示低音")
-                instructionRow("1_ 1__", "下划线表示延长（一个_延长1拍）")
-                instructionRow("0", "表示休止符")
+                instructionRow("1-7", localization.localized("editor.instruction.1"))
+                instructionRow("1. 2.", localization.localized("editor.instruction.2"))
+                instructionRow(",1 ,2", localization.localized("editor.instruction.3"))
+                instructionRow("1_ 1__", localization.localized("editor.instruction.4"))
+                instructionRow("0", localization.localized("editor.instruction.5"))
             }
             .font(.system(size: 14, design: .rounded))
             .foregroundStyle(.white.opacity(0.8))
@@ -131,11 +132,11 @@ struct SheetMusicEditorView: View {
         VStack(spacing: 16) {
             // 歌曲名称
             VStack(alignment: .leading, spacing: 8) {
-                Text("歌曲名称")
+                Text(localization.localized("editor.song.name.label"))
                     .font(.system(size: 14, weight: .semibold, design: .rounded))
                     .foregroundStyle(.white.opacity(0.7))
                 
-                TextField("请输入歌曲名称", text: $songName)
+                TextField(localization.localized("editor.song.name.placeholder"), text: $songName)
                     .textFieldStyle(.plain)
                     .padding(12)
                     .background(
@@ -148,7 +149,7 @@ struct SheetMusicEditorView: View {
             // BPM设置
             VStack(alignment: .leading, spacing: 8) {
                 HStack {
-                    Text("节拍速度 (BPM)")
+                    Text(localization.localized("editor.bpm.label"))
                         .font(.system(size: 14, weight: .semibold, design: .rounded))
                         .foregroundStyle(.white.opacity(0.7))
                     Spacer()
@@ -175,13 +176,13 @@ struct SheetMusicEditorView: View {
     private var editorSection: some View {
         VStack(alignment: .leading, spacing: 12) {
             HStack {
-                Text("简谱内容")
+                Text(localization.localized("editor.content.label"))
                     .font(.system(size: 16, weight: .bold, design: .rounded))
                     .foregroundStyle(.white)
                 
                 Spacer()
                 
-                Text("\(sheetMusicText.count) 字符")
+                Text(String(format: localization.localized("editor.character.count"), sheetMusicText.count))
                     .font(.system(size: 12, weight: .medium, design: .rounded))
                     .foregroundStyle(.white.opacity(0.5))
             }
@@ -210,7 +211,7 @@ struct SheetMusicEditorView: View {
             HStack {
                 Image(systemName: "lightbulb.fill")
                     .font(.system(size: 16, weight: .semibold))
-                Text("加载示例（小星星）")
+                Text(localization.localized("editor.load.example.button"))
                     .font(.system(size: 16, weight: .semibold, design: .rounded))
             }
             .foregroundStyle(.yellow)
@@ -234,7 +235,7 @@ struct SheetMusicEditorView: View {
             Button(action: validateAndPreview) {
                 HStack {
                     Image(systemName: "eye.fill")
-                    Text("预览")
+                    Text(localization.localized("editor.preview.button"))
                 }
                 .font(.system(size: 16, weight: .semibold, design: .rounded))
                 .foregroundStyle(.white)
@@ -254,7 +255,7 @@ struct SheetMusicEditorView: View {
             Button(action: saveCustomSong) {
                 HStack {
                     Image(systemName: "checkmark.circle.fill")
-                    Text("保存")
+                    Text(localization.localized("editor.save.button"))
                 }
                 .font(.system(size: 16, weight: .semibold, design: .rounded))
                 .foregroundStyle(.white)
@@ -276,12 +277,12 @@ struct SheetMusicEditorView: View {
     // MARK: - 已保存歌曲列表
     private var savedSongsSection: some View {
         VStack(alignment: .leading, spacing: 12) {
-            Text("我的歌曲")
+            Text(localization.localized("editor.my.songs.title"))
                 .font(.system(size: 18, weight: .bold, design: .rounded))
                 .foregroundStyle(.white)
             
             if gameState.customSongs.isEmpty {
-                Text("还没有保存的歌曲")
+                Text(localization.localized("editor.no.saved.songs"))
                     .font(.system(size: 14, design: .rounded))
                     .foregroundStyle(.white.opacity(0.5))
                     .frame(maxWidth: .infinity)
@@ -338,7 +339,7 @@ struct SheetMusicEditorView: View {
     // MARK: - 操作方法
     
     private func loadExample() {
-        songName = "小星星（示例）"
+        songName = "song.twinkle_star_example".localized
         bpm = 120
         sheetMusicText = SheetMusicParser.generateExample()
     }
@@ -359,10 +360,10 @@ struct SheetMusicEditorView: View {
         // 简单验证能否解析（不实际使用）
         guard SheetMusicParser.parse(
             sheetMusic: sheetMusicText,
-            name: songName.isEmpty ? "未命名" : songName,
+            name: songName.isEmpty ? localization.localized("editor.song.name.placeholder") : songName,
             bpm: bpm
         ) != nil else {
-            validationMessage = "简谱解析失败，请检查格式"
+            validationMessage = localization.localized("editor.validation.error.parse")
             showValidationError = true
             return
         }
@@ -406,7 +407,7 @@ struct SheetMusicEditorView: View {
     
     private func saveCustomSong() {
         guard !songName.isEmpty else {
-            validationMessage = "请输入歌曲名称"
+            validationMessage = localization.localized("editor.validation.error.name")
             showValidationError = true
             return
         }
@@ -414,7 +415,7 @@ struct SheetMusicEditorView: View {
         // 验证格式
         let validation = SheetMusicParser.validate(sheetMusic: sheetMusicText)
         if !validation.isValid {
-            validationMessage = validation.error ?? "未知错误"
+            validationMessage = validation.error ?? localization.localized("error")
             showValidationError = true
             return
         }
@@ -452,6 +453,7 @@ struct SheetMusicEditorView: View {
 /// 简谱预览视图
 struct SheetMusicPreviewView: View {
     let draftFilePath: URL
+    @ObservedObject private var localization = LocalizationManager.shared
     @Environment(\.dismiss) private var dismiss
     @State private var song: Song?
     @State private var errorMessage: String?
@@ -464,7 +466,7 @@ struct SheetMusicPreviewView: View {
                 if let song = song {
                     ScrollView {
                         VStack(spacing: 16) {
-                            Text("共 \(song.notes.count) 个音符")
+                            Text(String(format: localization.localized("editor.note.count"), song.notes.count))
                                 .font(.system(size: 14, design: .rounded))
                                 .foregroundStyle(.white.opacity(0.7))
                             
@@ -505,11 +507,11 @@ struct SheetMusicPreviewView: View {
                         .tint(.white)
                 }
             }
-            .navigationTitle(song?.name ?? "加载中...")
+            .navigationTitle(song?.name ?? localization.localized("editor.preview.loading"))
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
                 ToolbarItem(placement: .navigationBarTrailing) {
-                    Button("完成") {
+                    Button(localization.localized("editor.preview.done")) {
                         dismiss()
                     }
                     .foregroundStyle(.white)
@@ -528,17 +530,17 @@ struct SheetMusicPreviewView: View {
               let songName = draft["songName"] as? String,
               let bpm = draft["bpm"] as? Int,
               let sheetMusicText = draft["sheetMusicText"] as? String else {
-            errorMessage = "无法加载草稿数据"
+            errorMessage = localization.localized("editor.preview.error.load")
             return
         }
         
         // 解析简谱
         guard let parsedSong = SheetMusicParser.parse(
             sheetMusic: sheetMusicText,
-            name: songName.isEmpty ? "未命名" : songName,
+            name: songName.isEmpty ? localization.localized("editor.song.name.placeholder") : songName,
             bpm: bpm
         ) else {
-            errorMessage = "简谱解析失败"
+            errorMessage = localization.localized("editor.preview.error.parse")
             return
         }
         

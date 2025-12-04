@@ -58,7 +58,7 @@ extension Song {
     /// 小星星 (Twinkle Twinkle Little Star)
     /// 使用新的音阶布局：第一排 C4-C5 (索引0-7)，第二排 C5-C6 (索引8-15)
     static let twinkleTwinkleLittleStar = Song(
-        name: "小星星",
+        name: "song.twinkle_star".localized,
         notes: [
             // 一闪一闪亮晶晶 (Do Do Sol Sol La La Sol)
             0, 0, 4, 4, 5, 5, 4,
@@ -87,7 +87,7 @@ extension Song {
     /// 欢乐颂 (Ode to Joy)
     /// 使用新的音阶布局
     static let odeToJoy = Song(
-        name: "欢乐颂",
+        name: "song.ode_to_joy".localized,
         notes: [
             // 第一句：Mi Mi Fa Sol Sol Fa Mi Re Do Do Re Mi Mi Re Re
             2, 2, 3, 4, 4, 3, 2, 1, 0, 0, 1, 2, 2, 1, 1,
@@ -104,7 +104,7 @@ extension Song {
     /// 两只老虎 (Two Tigers)
     /// 使用新的音阶布局
     static let twoTigers = Song(
-        name: "两只老虎",
+        name: "song.two_tigers".localized,
         notes: [
             // 两只老虎 两只老虎 (Do Re Mi Do, Do Re Mi Do)
             0, 1, 2, 0, 0, 1, 2, 0,

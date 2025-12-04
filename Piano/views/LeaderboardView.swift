@@ -3,6 +3,7 @@ import SwiftUI
 /// 排行榜和成就视图
 struct LeaderboardView: View {
     @StateObject private var gameState = GameStateManager.shared
+    @ObservedObject private var localization = LocalizationManager.shared
     @Environment(\.dismiss) private var dismiss
     
     @State private var selectedTab = 0
@@ -30,8 +31,8 @@ struct LeaderboardView: View {
                 VStack(spacing: 0) {
                     // 分段选择器
                     Picker("", selection: $selectedTab) {
-                        Text("排行榜").tag(0)
-                        Text("成就").tag(1)
+                        Text(localization.localized("leaderboard.tab.rankings")).tag(0)
+                        Text(localization.localized("leaderboard.tab.achievements")).tag(1)
                     }
                     .pickerStyle(.segmented)
                     .padding()
@@ -47,7 +48,7 @@ struct LeaderboardView: View {
                     .tabViewStyle(.page(indexDisplayMode: .never))
                 }
             }
-            .navigationTitle("记录与成就")
+            .navigationTitle(localization.localized("leaderboard.records.title"))
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
                 ToolbarItem(placement: .navigationBarLeading) {
@@ -56,7 +57,7 @@ struct LeaderboardView: View {
                             Button(role: .destructive, action: {
                                 clearAllRecordsAlert()
                             }) {
-                                Label("清除所有记录", systemImage: "trash.fill")
+                                Label(localization.localized("leaderboard.menu.clear.records"), systemImage: "trash.fill")
                             }
                         }
                         
@@ -64,7 +65,7 @@ struct LeaderboardView: View {
                             Button(role: .destructive, action: {
                                 resetAchievementsAlert()
                             }) {
-                                Label("重置所有成就", systemImage: "arrow.counterclockwise")
+                                Label(localization.localized("leaderboard.menu.reset.achievements"), systemImage: "arrow.counterclockwise")
                             }
                         }
                         
@@ -73,7 +74,7 @@ struct LeaderboardView: View {
                             Button(role: .destructive, action: {
                                 clearAllDataAlert()
                             }) {
-                                Label("清除所有数据", systemImage: "xmark.circle.fill")
+                                Label(localization.localized("leaderboard.menu.clear.all"), systemImage: "xmark.circle.fill")
                             }
                         }
                     } label: {
@@ -83,15 +84,15 @@ struct LeaderboardView: View {
                 }
                 
                 ToolbarItem(placement: .navigationBarTrailing) {
-                    Button("完成") {
+                    Button(localization.localized("leaderboard.done")) {
                         dismiss()
                     }
                     .foregroundStyle(.white)
                 }
             }
-            .alert("确认清除", isPresented: $showClearAlert) {
-                Button("取消", role: .cancel) { }
-                Button("确认", role: .destructive) {
+            .alert(localization.localized("leaderboard.alert.confirm"), isPresented: $showClearAlert) {
+                Button(localization.localized("leaderboard.alert.cancel"), role: .cancel) { }
+                Button(localization.localized("leaderboard.alert.confirm.button"), role: .destructive) {
                     executeClearAction()
                 }
             } message: {
@@ -111,8 +112,8 @@ struct LeaderboardView: View {
                 if gameState.gameRecords.isEmpty {
                     emptyStateView(
                         icon: "trophy.fill",
-                        title: "暂无记录",
-                        message: "开始游戏来创建你的第一条记录吧！"
+                        title: localization.localized("leaderboard.empty.title"),
+                        message: localization.localized("leaderboard.empty.message")
                     )
                     .padding(.top, 60)
                 } else {
@@ -167,7 +168,7 @@ struct LeaderboardView: View {
             statColumn(
                 icon: "gamecontroller.fill",
                 color: .cyan,
-                title: "游戏次数",
+                title: localization.localized("leaderboard.stats.plays"),
                 value: "\(gameState.gameRecords.count)"
             )
             
@@ -177,7 +178,7 @@ struct LeaderboardView: View {
             statColumn(
                 icon: "star.fill",
                 color: .yellow,
-                title: "最高分",
+                title: localization.localized("leaderboard.stats.highest"),
                 value: "\(gameState.gameRecords.map { $0.score }.max() ?? 0)"
             )
             
@@ -187,7 +188,7 @@ struct LeaderboardView: View {
             statColumn(
                 icon: "bolt.fill",
                 color: .orange,
-                title: "最大连击",
+                title: localization.localized("leaderboard.stats.max.combo"),
                 value: "\(gameState.gameRecords.map { $0.maxCombo }.max() ?? 0)"
             )
         }
@@ -225,7 +226,7 @@ struct LeaderboardView: View {
                     .foregroundStyle(.yellow)
                 
                 VStack(alignment: .leading, spacing: 4) {
-                    Text("成就完成度")
+                    Text(localization.localized("leaderboard.achievement.progress"))
                         .font(.system(size: 16, weight: .bold, design: .rounded))
                         .foregroundStyle(.white)
                     
@@ -408,19 +409,19 @@ struct LeaderboardView: View {
     // MARK: - 清除功能
     
     private func clearAllRecordsAlert() {
-        clearAlertMessage = "确定要清除所有游戏记录吗？此操作不可撤销。"
+        clearAlertMessage = localization.localized("leaderboard.alert.clear.records")
         pendingClearAction = .records
         showClearAlert = true
     }
     
     private func resetAchievementsAlert() {
-        clearAlertMessage = "确定要重置所有成就吗？此操作不可撤销。"
+        clearAlertMessage = localization.localized("leaderboard.alert.reset.achievements")
         pendingClearAction = .achievements
         showClearAlert = true
     }
     
     private func clearAllDataAlert() {
-        clearAlertMessage = "确定要清除所有数据吗？包括游戏记录和成就，此操作不可撤销。"
+        clearAlertMessage = localization.localized("leaderboard.alert.clear.all")
         pendingClearAction = .all
         showClearAlert = true
     }

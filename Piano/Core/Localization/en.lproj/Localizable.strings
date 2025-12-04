@@ -129,3 +129,144 @@
 "tip.swipe.instructions" = "Swipe to see more";
 "tip.tap.to.play" = "Tap keys to start playing";
 "tip.loading.audio" = "Loading audio resources...";
+
+/* Game Main View - Menu */
+"game.menu.stats.highest" = "Highest";
+"game.menu.stats.achievements" = "Achievements";
+"game.menu.stats.songs" = "Songs";
+"game.menu.select.song" = "Select Song";
+"game.menu.my.songs" = "My Songs";
+"game.menu.notes" = "Notes";
+"game.menu.best" = "Best";
+"game.menu.editor" = "Sheet Music Editor";
+"game.menu.leaderboard" = "Leaderboard & Achievements";
+
+/* Game Main View - Mode Selection */
+"game.mode.select.title" = "Select Difficulty";
+"game.mode.fall.speed" = "Fall Speed";
+"game.mode.cancel" = "Cancel";
+"game.mode.start" = "Start Game";
+
+/* Game Result View */
+"game.result.title" = "Game Over";
+"game.result.total.score" = "Total Score";
+"game.result.accuracy.rate" = "Accuracy";
+"game.result.max.combo" = "Max Combo";
+"game.result.judgement.title" = "Judgement Details";
+"game.result.perfect" = "Perfect";
+"game.result.good" = "Good";
+"game.result.miss" = "Miss";
+"game.result.play.again" = "Play Again";
+"game.result.back.to.menu" = "Back to Menu";
+
+/* Sheet Music Editor */
+"editor.close" = "Close";
+"editor.info.title" = "Sheet Music Input Instructions";
+"editor.instruction.1" = "1-7 represent Do Re Mi Fa Sol La Si";
+"editor.instruction.2" = "Add dot after number for high notes (e.g., 1. 2.)";
+"editor.instruction.3" = "Add comma before number for low notes (e.g., ,1 ,2)";
+"editor.instruction.4" = "Underscore extends duration (one _ = 1 beat)";
+"editor.instruction.5" = "0 represents rest";
+"editor.song.name.label" = "Song Name";
+"editor.song.name.placeholder" = "Enter song name";
+"editor.bpm.label" = "Tempo (BPM)";
+"editor.content.label" = "Sheet Music Content";
+"editor.load.example.button" = "Load Example (Twinkle Star)";
+"editor.preview.button" = "Preview";
+"editor.save.button" = "Save";
+"editor.my.songs.title" = "My Songs";
+"editor.no.saved.songs" = "No saved songs yet";
+"editor.validation.error.title" = "Format Error";
+"editor.validation.error.name" = "Please enter song name";
+"editor.validation.error.parse" = "Sheet music parsing failed, please check format";
+"editor.preview.loading" = "Loading...";
+"editor.preview.done" = "Done";
+"editor.preview.error.title" = "Error";
+"editor.preview.error.load" = "Failed to load draft data";
+"editor.preview.error.parse" = "Sheet music parsing failed";
+
+/* Leaderboard View */
+"leaderboard.tab.rankings" = "Rankings";
+"leaderboard.tab.achievements" = "Achievements";
+"leaderboard.menu.clear.records" = "Clear All Records";
+"leaderboard.menu.reset.achievements" = "Reset All Achievements";
+"leaderboard.menu.clear.all" = "Clear All Data";
+"leaderboard.alert.confirm" = "Confirm Clear";
+"leaderboard.alert.cancel" = "Cancel";
+"leaderboard.alert.confirm.button" = "Confirm";
+"leaderboard.alert.clear.records" = "Are you sure to clear all game records? This action cannot be undone.";
+"leaderboard.alert.reset.achievements" = "Are you sure to reset all achievements? This action cannot be undone.";
+"leaderboard.alert.clear.all" = "Are you sure to clear all data? Including game records and achievements, this action cannot be undone.";
+"leaderboard.stats.plays" = "Games Played";
+"leaderboard.stats.highest" = "Highest Score";
+"leaderboard.stats.max.combo" = "Max Combo";
+"leaderboard.achievement.progress" = "Achievement Progress";
+"leaderboard.empty.title" = "No Records";
+"leaderboard.empty.message" = "Start a game to create your first record!";
+"leaderboard.records.title" = "Records & Achievements";
+"leaderboard.done" = "Done";
+
+/* Achievement Names */
+"achievement.first_game.title" = "First Challenge";
+"achievement.first_game.description" = "Complete your first game";
+"achievement.perfect_10.title" = "Perfect Streak";
+"achievement.perfect_10.description" = "Get 10 consecutive Perfect judgements";
+"achievement.combo_50.title" = "Combo Master";
+"achievement.combo_50.description" = "Achieve a 50 combo";
+"achievement.full_combo.title" = "Full Combo";
+"achievement.full_combo.description" = "Complete a song with full combo";
+"achievement.play_100.title" = "Music Enthusiast";
+"achievement.play_100.description" = "Complete 100 games";
+"achievement.expert_clear.title" = "Expert Player";
+"achievement.expert_clear.description" = "Complete a song on Expert difficulty";
+"achievement.sss_rank.title" = "Flawless";
+"achievement.sss_rank.description" = "Achieve SSS rank";
+
+/* Song Names */
+"song.twinkle_star" = "Twinkle Star";
+"song.ode_to_joy" = "Ode to Joy";
+"song.two_tigers" = "Two Tigers";
+"song.twinkle_star_example" = "Twinkle Star (Example)";
+
+/* About Page - Overview */
+"about.overview.subtitle" = "🎹 Elegant Playing Experience";
+"about.overview.description" = "Elegant Piano provides you with a high-quality digital piano experience, supporting multiple sound effects, themes, and game modes.";
+"about.feature.keyboard.title" = "16-Key Dual Keyboard";
+"about.feature.keyboard.description" = "High and low pitch areas separated, simple yet professional";
+"about.feature.themes.title" = "6 Beautiful Themes";
+"about.feature.themes.description" = "Including Classic Purple-Pink, Ocean Blue, Sunset Orange, etc.";
+"about.feature.effects.title" = "Audio Effects Processing";
+"about.feature.effects.description" = "Supports reverb, delay, distortion, and more";
+"about.feature.game.title" = "Rhythm Game Mode";
+"about.feature.game.description" = "Learn while playing, master piano in games";
+
+/* About Page - Features */
+"about.features.title" = "🎵 Features";
+"about.features.songs.title" = "Sample Song Library";
+"about.features.songs.description" = "Built-in classic songs like Twinkle Star, supports auto-play";
+"about.features.volume.title" = "Volume Control";
+"about.features.volume.description" = "Precise volume adjustment with shortcut key support";
+"about.features.audio.title" = "Audio Effects System";
+"about.features.audio.description" = "Four effects: reverb, delay, distortion, and chorus";
+"about.features.notation.title" = "Notation Switching";
+"about.features.notation.description" = "Supports switching between numbered and staff notation";
+
+/* About Page - Game Mode */
+"about.game.title" = "🎮 Game Mode";
+"about.game.name" = "Rhythm Notes";
+"about.game.description.full" = "Follow the falling notes and press the corresponding keys at the right time. Supports multiple difficulty levels and song selections.";
+"about.game.difficulty.title" = "Difficulty System";
+"about.game.difficulty.description" = "4 difficulty levels from Easy to Expert, suitable for all skill levels";
+"about.game.achievement.title" = "Achievement System";
+"about.game.achievement.description" = "7 achievements, challenge yourself continuously";
+"about.game.editor.title" = "Sheet Music Editor";
+"about.game.editor.description" = "Create custom songs using numbered notation";
+
+/* About Page - Developer */
+"about.developer.title" = "👨‍💻 Developer Info";
+"about.developer.team" = "Development Team";
+"about.developer.team.name" = "Comate Team";
+"about.developer.opensource" = "Open Source";
+"about.developer.opensource.status" = "MIT License";
+"about.developer.feedback" = "Feedback";
+"about.developer.feedback.welcome" = "Issues and suggestions welcome";
