@@ -67,7 +67,7 @@ struct SongSelectionPanel: View {
                 .font(.system(size: 26, weight: .semibold))
                 .foregroundStyle(themeManager.colors.primary)
             
-            Text("选择曲目")
+            Text("song.selection.title".localized)
                 .font(.system(size: 24, weight: .bold, design: .rounded))
                 .foregroundStyle(.white)
             
@@ -94,7 +94,7 @@ struct SongSelectionPanel: View {
                 Spacer()
                 Image(systemName: "xmark.circle.fill")
                     .font(.system(size: 18))
-                Text("取消")
+                Text("cancel".localized)
                     .font(.system(size: 18, weight: .semibold, design: .rounded))
                 Spacer()
             }

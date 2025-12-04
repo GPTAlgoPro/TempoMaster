@@ -1,0 +1,131 @@
+/* 通用 */
+"app.name" = "隽婉雅韵";
+"app.tagline" = "优雅的演奏体验";
+"cancel" = "取消";
+"confirm" = "确认";
+"close" = "关闭";
+"save" = "保存";
+"delete" = "删除";
+"edit" = "编辑";
+"back" = "返回";
+"next" = "下一步";
+"done" = "完成";
+"loading" = "加载中...";
+"error" = "错误";
+"success" = "成功";
+"apply" = "应用";
+
+/* 语言设置 */
+"language.system" = "跟随系统";
+"language.chinese" = "简体中文";
+"language.english" = "English";
+"language.setting" = "语言设置";
+
+/* 主界面 */
+"main.playing" = "🎵 正在播放：%@";
+"main.notation.lock" = "锁定屏幕方向为竖屏模式";
+
+/* 歌曲选择 */
+"song.selection.title" = "选择曲目";
+"song.my.songs" = "我的歌曲";
+"song.notes.count" = "%d 音符";
+"song.best.record" = "最佳: %@ - %d";
+"song.no.saved" = "还没有保存的歌曲";
+
+/* 控制面板 */
+"control.stop" = "停止";
+"control.songs" = "曲目";
+"control.game" = "游戏";
+"control.volume" = "音量";
+"control.effect" = "音效";
+"control.skin" = "外观";
+"control.language" = "语言";
+"control.notation" = "记谱法";
+"control.current.effect" = "当前音效";
+"control.disable.effect" = "关闭音效";
+"control.switch.effect" = "切换音效";
+"control.color.scheme" = "配色方案";
+"control.effect.preview" = "效果预览";
+"control.preview.text" = "预览文本";
+"control.apply.settings" = "应用设置";
+
+/* 游戏模式 */
+"game.title" = "缤纷乐符";
+"game.subtitle" = "节奏游戏模式";
+"game.select.song" = "选择歌曲";
+"game.select.difficulty" = "选择难度";
+"game.difficulty.easy" = "简单";
+"game.difficulty.normal" = "普通";
+"game.difficulty.hard" = "困难";
+"game.difficulty.expert" = "专家";
+"game.start" = "开始游戏";
+"game.pause" = "游戏暂停";
+"game.resume" = "继续";
+"game.restart" = "重新开始";
+"game.exit" = "退出游戏";
+"game.over" = "游戏结束";
+"game.score" = "得分";
+"game.combo" = "连击";
+"game.max.combo" = "最大连击";
+"game.accuracy" = "准确度";
+"game.rank" = "评级";
+"game.judgement.details" = "判定详情";
+"game.perfect" = "完美";
+"game.great" = "优秀";
+"game.good" = "良好";
+"game.miss" = "失误";
+"game.play.again" = "再来一次";
+"game.back.to.main" = "返回主界面";
+
+/* 排行榜 */
+"leaderboard.title" = "排行榜";
+"leaderboard.achievements" = "成就";
+"leaderboard.completion" = "成就完成度";
+
+/* 乐谱编辑器 */
+"editor.title" = "简谱输入说明";
+"editor.song.name" = "歌曲名称";
+"editor.bpm" = "节拍速度 (BPM)";
+"editor.content" = "简谱内容";
+"editor.character.count" = "%d 字符";
+"editor.load.example" = "加载示例（小星星）";
+"editor.preview" = "预览";
+"editor.note.count" = "共 %d 个音符";
+
+/* 关于页面 */
+"about.title" = "关于应用";
+"about.version.number" = "Version 1.0.0";
+"about.section.overview" = "总览";
+"about.section.features" = "功能";
+"about.section.game" = "游戏模式";
+"about.section.developer" = "开发";
+"about.description" = "隽婉雅韵为您提供高品质的简易数字电子琴体验，支持多种音效、主题和游戏模式。";
+"about.features" = "🎵 功能特性";
+"about.game.mode" = "🎮 游戏模式";
+"about.game.description" = "跟随下落的音符，在正确的时机按下对应的琴键。支持多种难度等级和歌曲选择。";
+"about.developer" = "开发信息";
+"about.version" = "版本";
+"about.contact" = "联系方式";
+
+/* 音符名称 */
+"note.do.low" = "低音 Do";
+"note.re.low" = "低音 Re";
+"note.mi.low" = "低音 Mi";
+"note.fa.low" = "低音 Fa";
+"note.sol.low" = "低音 Sol";
+"note.la.low" = "低音 La";
+"note.si.low" = "低音 Si";
+"note.do.high" = "高音 Do";
+"note.re.high" = "高音 Re";
+"note.mi.high" = "高音 Mi";
+"note.fa.high" = "高音 Fa";
+"note.sol.high" = "高音 Sol";
+"note.la.high" = "高音 La";
+"note.si.high" = "高音 Si";
+"note.do.highest" = "超高音 Do";
+"note.re.highest" = "超高音 Re";
+
+/* 提示信息 */
+"tip.swipe.instructions" = "左右滑动查看更多";
+"tip.tap.to.play" = "点击琴键开始演奏";
+"tip.loading.audio" = "正在加载音频资源...";

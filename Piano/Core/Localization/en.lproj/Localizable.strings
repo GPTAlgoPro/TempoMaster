@@ -1,0 +1,131 @@
+/* General */
+"app.name" = "Elegant Piano";
+"app.tagline" = "Elegant Playing Experience";
+"cancel" = "Cancel";
+"confirm" = "Confirm";
+"close" = "Close";
+"save" = "Save";
+"delete" = "Delete";
+"edit" = "Edit";
+"back" = "Back";
+"next" = "Next";
+"done" = "Done";
+"loading" = "Loading...";
+"error" = "Error";
+"success" = "Success";
+"apply" = "Apply";
+
+/* Language Settings */
+"language.system" = "Follow System";
+"language.chinese" = "Simplified Chinese";
+"language.english" = "English";
+"language.setting" = "Language Settings";
+
+/* Main View */
+"main.playing" = "🎵 Now Playing: %@";
+"main.notation.lock" = "Screen orientation locked to portrait mode";
+
+/* Song Selection */
+"song.selection.title" = "Select Song";
+"song.my.songs" = "My Songs";
+"song.notes.count" = "%d Notes";
+"song.best.record" = "Best: %@ - %d";
+"song.no.saved" = "No saved songs yet";
+
+/* Control Panel */
+"control.stop" = "Stop";
+"control.songs" = "Songs";
+"control.game" = "Game";
+"control.volume" = "Volume";
+"control.effect" = "Effect";
+"control.skin" = "Skin";
+"control.language" = "Language";
+"control.notation" = "Notation";
+"control.current.effect" = "Current Effect";
+"control.disable.effect" = "Disable Effect";
+"control.switch.effect" = "Switch Effect";
+"control.color.scheme" = "Color Scheme";
+"control.effect.preview" = "Effect Preview";
+"control.preview.text" = "Preview Text";
+"control.apply.settings" = "Apply Settings";
+
+/* Game Mode */
+"game.title" = "Rhythm Notes";
+"game.subtitle" = "Rhythm Game Mode";
+"game.select.song" = "Select Song";
+"game.select.difficulty" = "Select Difficulty";
+"game.difficulty.easy" = "Easy";
+"game.difficulty.normal" = "Normal";
+"game.difficulty.hard" = "Hard";
+"game.difficulty.expert" = "Expert";
+"game.start" = "Start Game";
+"game.pause" = "Game Paused";
+"game.resume" = "Resume";
+"game.restart" = "Restart";
+"game.exit" = "Exit Game";
+"game.over" = "Game Over";
+"game.score" = "Score";
+"game.combo" = "Combo";
+"game.max.combo" = "Max Combo";
+"game.accuracy" = "Accuracy";
+"game.rank" = "Rank";
+"game.judgement.details" = "Judgement Details";
+"game.perfect" = "Perfect";
+"game.great" = "Great";
+"game.good" = "Good";
+"game.miss" = "Miss";
+"game.play.again" = "Play Again";
+"game.back.to.main" = "Back to Main";
+
+/* Leaderboard */
+"leaderboard.title" = "Leaderboard";
+"leaderboard.achievements" = "Achievements";
+"leaderboard.completion" = "Achievement Completion";
+
+/* Sheet Music Editor */
+"editor.title" = "Numbered Notation Instructions";
+"editor.song.name" = "Song Name";
+"editor.bpm" = "Tempo (BPM)";
+"editor.content" = "Notation Content";
+"editor.character.count" = "%d Characters";
+"editor.load.example" = "Load Example (Twinkle Star)";
+"editor.preview" = "Preview";
+"editor.note.count" = "Total %d Notes";
+
+/* About Page */
+"about.title" = "About";
+"about.version.number" = "Version 1.0.0";
+"about.section.overview" = "Overview";
+"about.section.features" = "Features";
+"about.section.game" = "Game Mode";
+"about.section.developer" = "Developer";
+"about.description" = "Elegant Piano provides you with a high-quality digital piano experience, supporting multiple sound effects, themes, and game modes.";
+"about.features" = "🎵 Features";
+"about.game.mode" = "🎮 Game Mode";
+"about.game.description" = "Follow the falling notes and press the corresponding keys at the right time. Supports multiple difficulty levels and song selections.";
+"about.developer" = "Developer Info";
+"about.version" = "Version";
+"about.contact" = "Contact";
+
+/* Note Names */
+"note.do.low" = "Low Do";
+"note.re.low" = "Low Re";
+"note.mi.low" = "Low Mi";
+"note.fa.low" = "Low Fa";
+"note.sol.low" = "Low Sol";
+"note.la.low" = "Low La";
+"note.si.low" = "Low Si";
+"note.do.high" = "High Do";
+"note.re.high" = "High Re";
+"note.mi.high" = "High Mi";
+"note.fa.high" = "High Fa";
+"note.sol.high" = "High Sol";
+"note.la.high" = "High La";
+"note.si.high" = "High Si";
+"note.do.highest" = "Highest Do";
+"note.re.highest" = "Highest Re";
+
+/* Tips */
+"tip.swipe.instructions" = "Swipe to see more";
+"tip.tap.to.play" = "Tap keys to start playing";
+"tip.loading.audio" = "Loading audio resources...";

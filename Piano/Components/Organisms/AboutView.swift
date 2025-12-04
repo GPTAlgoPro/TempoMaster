@@ -7,10 +7,19 @@ struct AboutView: View {
     @State private var selectedSection: AboutSection = .overview
     
     enum AboutSection: String, CaseIterable {
-        case overview = "总览"
-        case features = "功能"
-        case game = "游戏模式"
-        case developer = "开发"
+        case overview
+        case features
+        case game
+        case developer
+        
+        var localizedTitle: String {
+            switch self {
+            case .overview: return "about.section.overview".localized
+            case .features: return "about.section.features".localized
+            case .game: return "about.section.game".localized
+            case .developer: return "about.section.developer".localized
+            }
+        }
     }
     
     var body: some View {
@@ -79,7 +88,7 @@ struct AboutView: View {
                 .font(.system(size: 24, weight: .semibold))
                 .foregroundStyle(themeManager.colors.primary)
             
-            Text("关于应用")
+            Text("about.title".localized)
                 .font(.system(size: 28, weight: .bold, design: .rounded))
                 .foregroundStyle(.white)
             
@@ -157,7 +166,7 @@ struct AboutView: View {
             
             // App名称
             VStack(spacing: 8) {
-                Text("隽婉雅韵")
+                Text("app.name".localized)
                     .font(.system(size: 32, weight: .bold, design: .rounded))
                     .foregroundStyle(.white)
                 
@@ -165,7 +174,7 @@ struct AboutView: View {
                     .font(.system(size: 16, weight: .medium, design: .rounded))
                     .foregroundStyle(.white.opacity(0.7))
                 
-                Text("Version 1.0.0")
+                Text("about.version.number".localized)
                     .font(.system(size: 14, weight: .regular, design: .monospaced))
                     .foregroundStyle(.white.opacity(0.5))
             }
@@ -182,7 +191,7 @@ struct AboutView: View {
                         selectedSection = section
                     }
                 } label: {
-                    Text(section.rawValue)
+                    Text(section.localizedTitle)
                         .font(.system(size: 14, weight: .medium, design: .rounded))
                         .foregroundStyle(selectedSection == section ? .white : .white.opacity(0.6))
                         .frame(maxWidth: .infinity)

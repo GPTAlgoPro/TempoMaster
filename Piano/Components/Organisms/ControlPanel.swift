@@ -1,28 +1,28 @@
 import SwiftUI
 
-/// 主控制面板 - 有机组件
+/// 主控制面板 - 有机组件 - 按功能分组合理布局
 struct ControlPanel: View {
     @ObservedObject var audioManager: AudioManager
     @ObservedObject var appState: AppState
+    @ObservedObject private var localizationManager = LocalizationManager.shared
     
     var body: some View {
         VStack(spacing: 8) {
-            // 第一行：主要控制按钮
+            // 第一行：核心功能（音量、曲目、游戏、停止）
             HStack(spacing: 8) {
-                // 停止按钮
+                // 音量按钮
                 CompactGlassButton(
-                    title: "停止",
-                    icon: "stop.circle.fill",
-                    tintColor: .blue,
+                    title: "control.volume".localized,
+                    icon: volumeIcon,
+                    tintColor: .cyan,
                     action: {
-                        appState.stopAll()
-                        audioManager.stopAll()
+                        appState.showModal(.volumeControl)
                     }
                 )
                 
-                // 示例曲按钮
+                // 曲目按钮
                 CompactGlassButton(
-                    title: "曲目",
+                    title: "control.songs".localized,
                     icon: "music.note.list",
                     tintColor: .purple,
                     action: {
@@ -32,7 +32,7 @@ struct ControlPanel: View {
                 
                 // 游戏按钮
                 CompactGlassButton(
-                    title: "游戏",
+                    title: "control.game".localized,
                     icon: "gamecontroller.fill",
                     tintColor: .green,
                     action: {
@@ -40,22 +40,23 @@ struct ControlPanel: View {
                     }
                 )
                 
-                // 音量按钮
+                // 停止按钮
                 CompactGlassButton(
-                    title: "音量",
-                    icon: volumeIcon,
-                    tintColor: .cyan,
+                    title: "control.stop".localized,
+                    icon: "stop.circle.fill",
+                    tintColor: .blue,
                     action: {
-                        appState.showModal(.volumeControl)
+                        appState.stopAll()
+                        audioManager.stopAll()
                     }
                 )
             }
             
-            // 第二行：设置按钮
+            // 第二行：音效和视觉设置（音效、简谱切换、外观）
             HStack(spacing: 8) {
                 // 音效按钮
                 CompactGlassButton(
-                    title: "音效",
+                    title: "control.effect".localized,
                     icon: effectIcon,
                     tintColor: effectColor,
                     action: {
@@ -63,19 +64,10 @@ struct ControlPanel: View {
                     }
                 )
                 
-                // 外观设置按钮
-                CompactGlassButton(
-                    title: "外观",
-                    icon: "paintpalette.fill",
-                    tintColor: .pink,
-                    action: {
-                        appState.showModal(.skinSettings)
-                    }
-                )
-                
-                // 简谱切换按钮
-                CompactGlassButton(
-                    title: appState.showNotation ? "简谱" : "ABC",
+                // 记谱法切换按钮 - 上方显示ABC/123，下方显示"记谱法"标签
+                NotationToggleButton(
+                    statusText: appState.showNotation ? "123" : "ABC",
+                    label: "control.notation".localized,
                     icon: appState.showNotation ? "textformat.123" : "textformat.abc",
                     tintColor: appState.showNotation ? .green : .gray,
                     action: {
@@ -85,13 +77,23 @@ struct ControlPanel: View {
                     }
                 )
                 
-                // 关于按钮
+                // 外观设置按钮
                 CompactGlassButton(
-                    title: "关于",
-                    icon: "info.circle.fill",
-                    tintColor: .indigo,
+                    title: "control.skin".localized,
+                    icon: "paintpalette.fill",
+                    tintColor: .pink,
                     action: {
-                        appState.showModal(.about)
+                        appState.showModal(.skinSettings)
+                    }
+                )
+                
+                // 语言切换按钮
+                CompactGlassButton(
+                    title: "control.language".localized,
+                    icon: "globe",
+                    tintColor: .orange,
+                    action: {
+                        appState.showModal(.languageSettings)
                     }
                 )
             }

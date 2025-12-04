@@ -5,6 +5,7 @@ struct PianoMainView: View {
     @StateObject private var audioManager = AudioManager()
     @StateObject private var appState = AppState.shared
     @StateObject private var themeManager = ThemeManager.shared
+    @ObservedObject private var localizationManager = LocalizationManager.shared
     
     var body: some View {
         ZStack {
@@ -54,7 +55,7 @@ struct PianoMainView: View {
                 
                 // 3. 正在播放信息
                 if let song = appState.currentSong {
-                    Text("🎵 正在播放：\(song.name)")
+                    Text("main.playing".localized(with: song.name))
                         .font(.system(size: 14, weight: .semibold, design: .rounded))
                         .foregroundStyle(.white)
                         .padding(.horizontal, 12)
@@ -191,6 +192,14 @@ struct PianoMainView: View {
                 )
             )
             
+        case .languageSettings:
+            LanguageSettingsView(
+                isPresented: Binding(
+                    get: { appState.activeModal == .languageSettings },
+                    set: { if !$0 { appState.dismissModal() } }
+                )
+            )
+            
         case .game:
             GameMainView(
                 audioManager: audioManager,
@@ -245,32 +254,71 @@ struct PianoMainView: View {
 
 // MARK: - 子组件
 
-/// 标题视图
+/// 标题视图 - 可点击进入关于页面
 struct HeaderView: View {
     let currentSong: Song?
     @ObservedObject private var themeManager = ThemeManager.shared
+    @ObservedObject private var localizationManager = LocalizationManager.shared
+    @ObservedObject private var appState = AppState.shared
+    @State private var isPressed = false
     
     var body: some View {
-        HStack(spacing: 12) {
-            Image(systemName: "music.note")
-                .font(.system(size: 32, weight: .semibold))
-                .foregroundStyle(themeManager.colors.primary)
+        Button {
+            // 触觉反馈
+            let generator = UIImpactFeedbackGenerator(style: .light)
+            generator.impactOccurred()
             
-            Text("隽婉雅韵")
-                .font(.system(size: 28, weight: .bold, design: .rounded))
-                .foregroundStyle(.white)
+            // 显示关于页面
+            withAnimation(.spring(response: 0.4, dampingFraction: 0.8)) {
+                appState.showModal(.about)
+            }
+        } label: {
+            HStack(spacing: 12) {
+                Image(systemName: "music.note")
+                    .font(.system(size: 32, weight: .semibold))
+                    .foregroundStyle(themeManager.colors.primary)
+                
+                Text("app.name".localized)
+                    .font(.system(size: 28, weight: .bold, design: .rounded))
+                    .foregroundStyle(.white)
+                
+                // 小巧的信息图标提示
+                Image(systemName: "info.circle.fill")
+                    .font(.system(size: 16, weight: .semibold))
+                    .foregroundStyle(.white.opacity(0.6))
+                    .padding(4)
+                    .background(
+                        Circle()
+                            .fill(themeManager.colors.primary.opacity(0.3))
+                    )
+            }
+            .padding(.horizontal, 24)
+            .padding(.vertical, 12)
+            .background(
+                RoundedRectangle(cornerRadius: 20)
+                    .fill(.ultraThinMaterial)
+                    .overlay(
+                        RoundedRectangle(cornerRadius: 20)
+                            .stroke(themeManager.colors.primary.opacity(isPressed ? 0.5 : 0.3), lineWidth: 1.5)
+                    )
+            )
+            .shadow(color: themeManager.colors.primary.opacity(0.2), radius: 8, x: 0, y: 4)
+            .scaleEffect(isPressed ? 0.96 : 1.0)
         }
-        .padding(.horizontal, 24)
-        .padding(.vertical, 12)
-        .background(
-            RoundedRectangle(cornerRadius: 20)
-                .fill(.ultraThinMaterial)
-                .overlay(
-                    RoundedRectangle(cornerRadius: 20)
-                        .stroke(themeManager.colors.primary.opacity(0.3), lineWidth: 1.5)
-                )
+        .buttonStyle(PlainButtonStyle())
+        .simultaneousGesture(
+            DragGesture(minimumDistance: 0)
+                .onChanged { _ in
+                    withAnimation(.easeOut(duration: 0.1)) {
+                        isPressed = true
+                    }
+                }
+                .onEnded { _ in
+                    withAnimation(.easeOut(duration: 0.1)) {
+                        isPressed = false
+                    }
+                }
         )
-        .shadow(color: themeManager.colors.primary.opacity(0.2), radius: 8, x: 0, y: 4)
     }
 }
 

@@ -26,6 +26,7 @@ final class AppState: ObservableObject {
         case effectControl
         case about
         case game
+        case languageSettings
     }
     
     enum PerformanceMode: String, CaseIterable {
