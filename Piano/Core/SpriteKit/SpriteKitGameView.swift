@@ -539,13 +539,13 @@ struct SpriteKitGamePlayView: View {
                 .ignoresSafeArea()
             
             VStack(spacing: 20) {
-                Text("游戏暂停")
+                Text("game.pause.title".localized)
                     .font(.largeTitle.bold())
                     .foregroundColor(.white)
                 
                 VStack(spacing: 16) {
                     Button(action: togglePause) {
-                        Label("继续游戏", systemImage: "play.fill")
+                        Label("game.pause.resume".localized, systemImage: "play.fill")
                             .frame(maxWidth: .infinity)
                             .padding()
                             .background(Color.green)
@@ -557,7 +557,7 @@ struct SpriteKitGamePlayView: View {
                         stopGame()
                         onExit()
                     }) {
-                        Label("退出游戏", systemImage: "xmark")
+                        Label("game.pause.exit".localized, systemImage: "xmark")
                             .frame(maxWidth: .infinity)
                             .padding()
                             .background(Color.red)

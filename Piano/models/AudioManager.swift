@@ -29,6 +29,16 @@ final class AudioManager: ObservableObject {
         case delay = "延迟"
         case distortion = "失真"
         case chorus = "合唱"
+        
+        var localizedName: String {
+            switch self {
+            case .none: return "audio.effect.none".localized
+            case .reverb: return "audio.effect.reverb".localized
+            case .delay: return "audio.effect.delay".localized
+            case .distortion: return "audio.effect.distortion".localized
+            case .chorus: return "audio.effect.chorus".localized
+            }
+        }
     }
     
     /// 当前音频效果

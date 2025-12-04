@@ -141,6 +141,7 @@ struct VolumeControlPanel: View {
     @ObservedObject var audioManager: AudioManager
     @Binding var isPresented: Bool
     @ObservedObject private var themeManager = ThemeManager.shared
+    @ObservedObject private var localization = LocalizationManager.shared
     
     var body: some View {
         VStack(spacing: 24) {
@@ -150,7 +151,7 @@ struct VolumeControlPanel: View {
                     .font(.system(size: 28, weight: .semibold))
                     .foregroundStyle(themeManager.colors.primary)
                 
-                Text("音量控制")
+                Text(localization.localized("volume.title"))
                     .font(.system(size: 24, weight: .bold, design: .rounded))
                     .foregroundStyle(.white)
                 

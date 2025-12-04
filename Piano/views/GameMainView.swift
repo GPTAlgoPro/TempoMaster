@@ -543,7 +543,7 @@ struct GameMainView: View {
         }) {
             HStack {
                 VStack(alignment: .leading, spacing: 4) {
-                    Text(mode.rawValue)
+                    Text(mode.localizedName)
                         .font(.system(size: 18, weight: .bold, design: .rounded))
                         .foregroundStyle(.white)
                     

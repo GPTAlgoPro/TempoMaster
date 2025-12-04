@@ -408,22 +408,22 @@ struct AboutView: View {
             VStack(spacing: 14) {
                 DeveloperInfoRow(
                     icon: "hammer.fill",
-                    label: "开发者",
-                    value: "孙凯",
+                    label: localization.localized("about.developer.label"),
+                    value: localization.localized("about.developer.name"),
                     color: .green
                 )
                 
                 DeveloperInfoRow(
                     icon: "calendar",
-                    label: "更新日期",
-                    value: "2025年12月05日",
+                    label: localization.localized("about.update.date.label"),
+                    value: localization.localized("about.update.date.value"),
                     color: .orange
                 )
                 
                 DeveloperInfoRow(
                     icon: "swift",
-                    label: "技术栈",
-                    value: "SwiftUI + AVFoundation + SpriteKit",
+                    label: localization.localized("about.tech.stack.label"),
+                    value: localization.localized("about.tech.stack.value"),
                     color: .red
                 )
                 
@@ -460,7 +460,7 @@ struct AboutView: View {
                 Spacer()
                 Image(systemName: "xmark.circle.fill")
                     .font(.system(size: 18))
-                Text("关闭")
+                Text(localization.localized("close"))
                     .font(.system(size: 18, weight: .semibold, design: .rounded))
                 Spacer()
             }

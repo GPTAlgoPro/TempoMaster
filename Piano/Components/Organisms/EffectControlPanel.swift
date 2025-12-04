@@ -5,6 +5,7 @@ struct EffectControlPanel: View {
     @ObservedObject var audioManager: AudioManager
     let onDismiss: () -> Void
     @ObservedObject private var themeManager = ThemeManager.shared
+    @ObservedObject private var localization = LocalizationManager.shared
     
     var body: some View {
         VStack(spacing: 24) {
@@ -14,7 +15,7 @@ struct EffectControlPanel: View {
                     .font(.system(size: 28, weight: .semibold))
                     .foregroundStyle(themeManager.colors.primary)
                 
-                Text("音效设置")
+                Text(localization.localized("effect.title"))
                     .font(.system(size: 24, weight: .bold, design: .rounded))
                     .foregroundStyle(.white)
                 
@@ -31,7 +32,7 @@ struct EffectControlPanel: View {
             
             // 当前音效显示
             VStack(spacing: 16) {
-                Text("当前音效")
+                Text(localization.localized("effect.current"))
                     .font(.system(size: 16, weight: .medium))
                     .foregroundStyle(.white.opacity(0.8))
                 
@@ -40,7 +41,7 @@ struct EffectControlPanel: View {
                         .font(.system(size: 32, weight: .semibold))
                         .foregroundStyle(effectColor)
                     
-                    Text(audioManager.currentEffect.rawValue)
+                    Text(audioManager.currentEffect.localizedName)
                         .font(.system(size: 28, weight: .bold, design: .rounded))
                         .foregroundStyle(.white)
                 }
@@ -78,7 +79,7 @@ struct EffectControlPanel: View {
                     let impactFeedback = UIImpactFeedbackGenerator(style: .light)
                     impactFeedback.impactOccurred()
                 } label: {
-                    Text("关闭音效")
+                    Text(localization.localized("effect.disable"))
                         .font(.system(size: 16, weight: .semibold))
                         .foregroundStyle(.white)
                         .frame(maxWidth: .infinity)
@@ -98,7 +99,7 @@ struct EffectControlPanel: View {
                     let impactFeedback = UIImpactFeedbackGenerator(style: .medium)
                     impactFeedback.impactOccurred()
                 } label: {
-                    Text("切换音效")
+                    Text(localization.localized("effect.switch"))
                         .font(.system(size: 16, weight: .semibold))
                         .foregroundStyle(.white)
                         .frame(maxWidth: .infinity)
@@ -164,7 +165,7 @@ struct EffectOptionButton: View {
                     .font(.system(size: 24, weight: .semibold))
                     .foregroundStyle(isSelected ? .white : effectColor)
                 
-                Text(effect.rawValue)
+                Text(effect.localizedName)
                     .font(.system(size: 14, weight: .medium))
                     .foregroundStyle(isSelected ? .white : .white.opacity(0.8))
             }

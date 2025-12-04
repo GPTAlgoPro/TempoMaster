@@ -30,6 +30,17 @@ enum ColorPalette: String, CaseIterable, Identifiable {
         
         var id: String { rawValue }
         
+        var localizedName: String {
+            switch self {
+            case .classic: return "theme.classic".localized
+            case .ocean: return "theme.ocean".localized
+            case .sunset: return "theme.sunset".localized
+            case .forest: return "theme.forest".localized
+            case .ruby: return "theme.ruby".localized
+            case .random: return "theme.random".localized
+            }
+        }
+        
         var colors: ThemeColors {
             switch self {
             case .classic:

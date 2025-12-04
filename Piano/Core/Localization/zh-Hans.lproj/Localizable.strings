@@ -270,3 +270,57 @@
 "about.developer.opensource.status" = "MIT License";
 "about.developer.feedback" = "反馈渠道";
 "about.developer.feedback.welcome" = "欢迎提出问题和建议";
+
+/* 音量控制面板 */
+"volume.title" = "音量控制";
+
+/* 音效控制面板 */
+"effect.title" = "音效设置";
+"effect.current" = "当前音效";
+"effect.disable" = "关闭音效";
+"effect.switch" = "切换音效";
+
+/* 皮肤设置 */
+"skin.title" = "外观设置";
+"skin.color.scheme" = "配色方案";
+"skin.preview" = "预览";
+"skin.apply" = "应用";
+
+/* 游戏难度等级 */
+"game.mode.easy.name" = "简单";
+"game.mode.normal.name" = "普通";
+"game.mode.hard.name" = "困难";
+"game.mode.expert.name" = "专家";
+
+/* 游戏暂停菜单 */
+"game.pause.title" = "游戏暂停";
+"game.pause.resume" = "继续游戏";
+"game.pause.exit" = "退出游戏";
+
+/* 配色方案名称 */
+"theme.classic" = "经典紫粉";
+"theme.ocean" = "海洋蓝";
+"theme.sunset" = "日落橙";
+"theme.forest" = "森林绿";
+"theme.ruby" = "宝石红";
+"theme.random" = "随机配色";
+
+/* 音效名称 */
+"audio.effect.none" = "原声";
+"audio.effect.reverb" = "混响";
+"audio.effect.delay" = "延迟";
+"audio.effect.distortion" = "失真";
+"audio.effect.chorus" = "合唱";
+
+/* 关于页面 - 开发者详情 */
+"about.developer.label" = "开发者";
+"about.developer.name" = "孙凯";
+"about.update.date.label" = "更新日期";
+"about.update.date.value" = "2025年12月05日";
+"about.tech.stack.label" = "技术栈";
+"about.tech.stack.value" = "SwiftUI + AVFoundation + SpriteKit";
+
+/* 皮肤设置额外 */
+"skin.preview.title" = "效果预览";
+"skin.preview.text" = "预览文本";
+"skin.apply.button" = "应用设置";

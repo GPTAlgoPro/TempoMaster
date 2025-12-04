@@ -270,3 +270,57 @@
 "about.developer.opensource.status" = "MIT License";
 "about.developer.feedback" = "Feedback";
 "about.developer.feedback.welcome" = "Issues and suggestions welcome";
+
+/* Volume Control Panel */
+"volume.title" = "Volume Control";
+
+/* Effect Control Panel */
+"effect.title" = "Audio Effects";
+"effect.current" = "Current Effect";
+"effect.disable" = "Disable Effect";
+"effect.switch" = "Switch Effect";
+
+/* Skin Settings */
+"skin.title" = "Appearance Settings";
+"skin.color.scheme" = "Color Scheme";
+"skin.preview" = "Preview";
+"skin.apply" = "Apply";
+
+/* Game Mode Difficulty */
+"game.mode.easy.name" = "Easy";
+"game.mode.normal.name" = "Normal";
+"game.mode.hard.name" = "Hard";
+"game.mode.expert.name" = "Expert";
+
+/* Game Pause Menu */
+"game.pause.title" = "Game Paused";
+"game.pause.resume" = "Resume Game";
+"game.pause.exit" = "Exit Game";
+
+/* Color Scheme Names */
+"theme.classic" = "Classic Purple-Pink";
+"theme.ocean" = "Ocean Blue";
+"theme.sunset" = "Sunset Orange";
+"theme.forest" = "Forest Green";
+"theme.ruby" = "Ruby Red";
+"theme.random" = "Random Colors";
+
+/* Audio Effect Names */
+"audio.effect.none" = "Original";
+"audio.effect.reverb" = "Reverb";
+"audio.effect.delay" = "Delay";
+"audio.effect.distortion" = "Distortion";
+"audio.effect.chorus" = "Chorus";
+
+/* About Page - Developer Details */
+"about.developer.label" = "Developer";
+"about.developer.name" = "Kai Sun";
+"about.update.date.label" = "Last Update";
+"about.update.date.value" = "December 5, 2025";
+"about.tech.stack.label" = "Tech Stack";
+"about.tech.stack.value" = "SwiftUI + AVFoundation + SpriteKit";
+
+/* Skin Settings Additional */
+"skin.preview.title" = "Preview";
+"skin.preview.text" = "Preview Text";
+"skin.apply.button" = "Apply Settings";

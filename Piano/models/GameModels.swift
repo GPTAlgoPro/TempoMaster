@@ -4,10 +4,19 @@ import Combine
 
 // MARK: - 游戏模式
 enum GameMode: String, Codable {
-    case easy = "简单"
-    case normal = "普通"
-    case hard = "困难"
-    case expert = "专家"
+    case easy = "Easy"
+    case normal = "Normal"
+    case hard = "Hard"
+    case expert = "Expert"
+    
+    var localizedName: String {
+        switch self {
+        case .easy: return "game.mode.easy.name".localized
+        case .normal: return "game.mode.normal.name".localized
+        case .hard: return "game.mode.hard.name".localized
+        case .expert: return "game.mode.expert.name".localized
+        }
+    }
     
     var fallSpeed: Double {
         switch self {

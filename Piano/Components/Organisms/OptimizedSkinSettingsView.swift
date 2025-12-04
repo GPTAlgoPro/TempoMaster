@@ -4,6 +4,7 @@ import SwiftUI
 struct OptimizedSkinSettingsView: View {
     @Binding var isPresented: Bool
     @ObservedObject private var themeManager = ThemeManager.shared
+    @ObservedObject private var localization = LocalizationManager.shared
     @State private var selectedColorScheme: ThemeManager.ColorPalette
     @State private var randomColorScheme: ThemeManager.ColorPalette = .random
     
@@ -62,7 +63,7 @@ struct OptimizedSkinSettingsView: View {
                 .font(.system(size: 26, weight: .semibold))
                 .foregroundStyle(themeManager.colors.primary)
             
-            Text("外观设置")
+            Text(localization.localized("skin.title"))
                 .font(.system(size: 24, weight: .bold, design: .rounded))
                 .foregroundStyle(.white)
             
@@ -97,7 +98,7 @@ struct OptimizedSkinSettingsView: View {
                     .font(.system(size: 20))
                     .foregroundStyle(themeManager.colors.primary)
                 
-                Text("配色方案")
+                Text(localization.localized("skin.color.scheme"))
                     .font(.system(size: 18, weight: .bold, design: .rounded))
                     .foregroundStyle(.white)
                 
@@ -132,7 +133,7 @@ struct OptimizedSkinSettingsView: View {
                     .font(.system(size: 20))
                     .foregroundStyle(themeManager.colors.primary)
                 
-                Text("效果预览")
+                Text(localization.localized("skin.preview.title"))
                     .font(.system(size: 18, weight: .bold, design: .rounded))
                     .foregroundStyle(.white)
                 
@@ -150,7 +151,7 @@ struct OptimizedSkinSettingsView: View {
                 .frame(height: 120)
                 .overlay(
                     VStack(spacing: 12) {
-                        Text("预览文本")
+                        Text(localization.localized("skin.preview.text"))
                             .font(.system(size: 18, weight: .bold, design: .rounded))
                             .foregroundStyle(.white)
                         
@@ -179,7 +180,7 @@ struct OptimizedSkinSettingsView: View {
                     Spacer()
                     Image(systemName: "checkmark.circle.fill")
                         .font(.system(size: 20))
-                    Text("应用设置")
+                    Text(localization.localized("skin.apply.button"))
                         .font(.system(size: 18, weight: .bold, design: .rounded))
                     Spacer()
                 }
@@ -244,7 +245,7 @@ struct ColorSchemeCard: View {
                             .stroke(isSelected ? Color.white : Color.white.opacity(0.3), lineWidth: isSelected ? 3 : 1)
                     )
                 
-                Text(scheme.rawValue)
+                Text(scheme.localizedName)
                     .font(.system(size: 11, weight: .semibold, design: .rounded))
                     .foregroundStyle(.white)
                     .lineLimit(1)

@@ -57,9 +57,10 @@ struct SheetNote {
 extension Song {
     /// 小星星 (Twinkle Twinkle Little Star)
     /// 使用新的音阶布局：第一排 C4-C5 (索引0-7)，第二排 C5-C6 (索引8-15)
-    static let twinkleTwinkleLittleStar = Song(
-        name: "song.twinkle_star".localized,
-        notes: [
+    static var twinkleTwinkleLittleStar: Song {
+        Song(
+            name: "song.twinkle_star".localized,
+            notes: [
             // 一闪一闪亮晶晶 (Do Do Sol Sol La La Sol)
             0, 0, 4, 4, 5, 5, 4,
             // 满天都是小星星 (Fa Fa Mi Mi Re Re Do)
@@ -80,15 +81,17 @@ extension Song {
             0.4, 0.4, 0.4, 0.4, 0.4, 0.4, 0.8,
             0.4, 0.4, 0.4, 0.4, 0.4, 0.4, 0.8,
             0.4, 0.4, 0.4, 0.4, 0.4, 0.4, 0.8
-        ],
-        bpm: 120
-    )
+            ],
+            bpm: 120
+        )
+    }
     
     /// 欢乐颂 (Ode to Joy)
     /// 使用新的音阶布局
-    static let odeToJoy = Song(
-        name: "song.ode_to_joy".localized,
-        notes: [
+    static var odeToJoy: Song {
+        Song(
+            name: "song.ode_to_joy".localized,
+            notes: [
             // 第一句：Mi Mi Fa Sol Sol Fa Mi Re Do Do Re Mi Mi Re Re
             2, 2, 3, 4, 4, 3, 2, 1, 0, 0, 1, 2, 2, 1, 1,
             // 第二句：Mi Mi Fa Sol Sol Fa Mi Re Do Do Re Mi Re Do Do
@@ -97,15 +100,17 @@ extension Song {
         durations: [
             0.4, 0.4, 0.4, 0.4, 0.4, 0.4, 0.4, 0.4, 0.4, 0.4, 0.4, 0.4, 0.6, 0.2, 0.8,
             0.4, 0.4, 0.4, 0.4, 0.4, 0.4, 0.4, 0.4, 0.4, 0.4, 0.4, 0.4, 0.6, 0.2, 0.8
-        ],
-        bpm: 120
-    )
+            ],
+            bpm: 120
+        )
+    }
     
     /// 两只老虎 (Two Tigers)
     /// 使用新的音阶布局
-    static let twoTigers = Song(
-        name: "song.two_tigers".localized,
-        notes: [
+    static var twoTigers: Song {
+        Song(
+            name: "song.two_tigers".localized,
+            notes: [
             // 两只老虎 两只老虎 (Do Re Mi Do, Do Re Mi Do)
             0, 1, 2, 0, 0, 1, 2, 0,
             // 跑得快 跑得快 (Mi Fa Sol, Mi Fa Sol)
@@ -122,14 +127,17 @@ extension Song {
             0.4, 0.4, 0.8, 0.4, 0.4, 0.8,
             0.3, 0.2, 0.2, 0.2, 0.4, 0.4, 0.3, 0.2, 0.2, 0.2, 0.4, 0.4,
             0.4, 0.4, 0.8, 0.4, 0.4, 0.8
-        ],
-        bpm: 120
-    )
+            ],
+            bpm: 120
+        )
+    }
     
     /// 所有示例曲
-    static let allSongs: [Song] = [
-        twinkleTwinkleLittleStar,
-        twoTigers,
-        odeToJoy
-    ]
+    static var allSongs: [Song] {
+        [
+            twinkleTwinkleLittleStar,
+            twoTigers,
+            odeToJoy
+        ]
+    }
 }
