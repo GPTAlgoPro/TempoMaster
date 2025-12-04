@@ -1,36 +1,6 @@
 {
   "colors" : [
     {
-      "color" : {
-        "platform" : "universal",
-        "reference" : "secondaryLabelColor"
-      },
-      "idiom" : "universal"
-    },
-    {
-      "appearances" : [
-        {
-          "appearance" : "luminosity",
-          "value" : "light"
-        }
-      ],
-      "color" : {
-        "platform" : "universal",
-        "reference" : "systemGrayColor"
-      },
-      "idiom" : "universal"
-    },
-    {
-      "appearances" : [
-        {
-          "appearance" : "luminosity",
-          "value" : "dark"
-        }
-      ],
-      "color" : {
-        "platform" : "ios",
-        "reference" : "systemBackgroundColor"
-      },
       "idiom" : "universal"
     }
   ],
