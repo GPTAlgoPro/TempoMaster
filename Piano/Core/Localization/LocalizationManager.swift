@@ -46,7 +46,19 @@ class LocalizationManager: ObservableObject {
     
     /// 获取本地化字符串
     func localized(_ key: String, comment: String = "") -> String {
-        let language = currentLanguage == .system ? Language.chinese : currentLanguage
+        let language: Language
+        
+        if currentLanguage == .system {
+            // 跟随系统语言
+            let systemLanguage = Locale.preferredLanguages.first ?? "en"
+            if systemLanguage.hasPrefix("zh") {
+                language = .chinese
+            } else {
+                language = .english
+            }
+        } else {
+            language = currentLanguage
+        }
         
         guard let path = Bundle.main.path(forResource: language.rawValue, ofType: "lproj"),
               let bundle = Bundle(path: path) else {
