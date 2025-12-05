@@ -119,8 +119,10 @@ final class AudioManager: ObservableObject {
         // 4. 清空数组
         playerNodes.removeAll()
         
-        // 5. 更新播放状态
-        isPlaying = false
+        // 5. 更新播放状态 - 确保在主线程更新
+        DispatchQueue.main.async { [weak self] in
+            self?.isPlaying = false
+        }
         
         // 6. 短暂延迟确保音频完全停止
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
@@ -374,8 +376,10 @@ final class AudioManager: ObservableObject {
         }
         playerNodes.append(playerNode)
         
-        // 更新播放状态
-        isPlaying = true
+        // 更新播放状态 - 确保在主线程更新
+        DispatchQueue.main.async { [weak self] in
+            self?.isPlaying = true
+        }
         
         // 只在手动演奏时触发触觉反馈
         if scheduledTime == nil {
@@ -422,7 +426,11 @@ final class AudioManager: ObservableObject {
             
             self.songScheduler = scheduler
             self.isPlayingSong = true
-            self.isPlaying = true
+            
+            // 更新播放状态 - 确保在主线程更新
+            DispatchQueue.main.async { [weak self] in
+                self?.isPlaying = true
+            }
             
             // 开始调度
             scheduler.start()
