@@ -397,36 +397,36 @@ struct SpriteKitGamePlayView: View {
         }
     }
     
-    // 根据基础颜色获取高音区琴键颜色 - 使用同色系但更深的颜色
+    // 根据基础颜色获取高音区琴键颜色 - 使用同色系但更深更暗的颜色
     private func getHighKeyColor(from baseColor: Color) -> Color {
         switch baseColor {
         case .red:
-            return .red.opacity(0.8) // 深红色
+            return .red.opacity(0.55) // 更深的红色
         case .orange:
-            return .orange.opacity(0.85) // 深橙色
+            return .orange.opacity(0.6) // 更深的橙色
         case .yellow:
-            return .yellow.opacity(0.7) // 深黄色
+            return .yellow.opacity(0.5) // 更深的黄色
         case .green:
-            return .green.opacity(0.8) // 深绿色
+            return .green.opacity(0.55) // 更深的绿色
         case .cyan:
-            return .cyan.opacity(0.8) // 深青色
+            return .cyan.opacity(0.55) // 更深的青色
         case .blue:
-            return .blue.opacity(0.85) // 深蓝色
+            return .blue.opacity(0.6) // 更深的蓝色
         case .purple:
-            return .purple.opacity(0.8) // 深紫色
+            return .purple.opacity(0.55) // 更深的紫色
         default:
-            return baseColor.opacity(0.7)
+            return baseColor.opacity(0.5)
         }
     }
     
     // 获取高音区琴键边框颜色
     private func getHighKeyBorder(from baseColor: Color) -> Color {
-        return getHighKeyColor(from: baseColor).opacity(0.8)
+        return getHighKeyColor(from: baseColor).opacity(0.7)
     }
     
     // 获取高音区琴键阴影颜色
     private func getHighKeyShadow(from baseColor: Color) -> Color {
-        return getHighKeyColor(from: baseColor).opacity(0.3)
+        return getHighKeyColor(from: baseColor).opacity(0.25)
     }
     
     // 触发指定轨道的音符判定
