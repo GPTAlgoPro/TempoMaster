@@ -122,8 +122,21 @@ struct PianoMainView: View {
                 )
                 .padding(.bottom, geometry.safeAreaInsets.bottom > 0 ? 0 : 12)
             }
-            .padding(.horizontal, 20)
+            .padding(.horizontal, adaptiveHorizontalPadding(for: geometry.size))
             .frame(maxWidth: .infinity, maxHeight: .infinity)
+        }
+    }
+    
+    /// 根据屏幕宽度返回自适应水平边距
+    private func adaptiveHorizontalPadding(for size: CGSize) -> CGFloat {
+        if size.width <= 375 {
+            return 8   // iPhone 13 mini, iPhone SE - 最小边距
+        } else if size.width < 400 {
+            return 12  // 标准 iPhone
+        } else if size.width < 600 {
+            return 16  // iPhone Pro Max
+        } else {
+            return 24  // iPad
         }
     }
     
@@ -322,39 +335,50 @@ struct HeaderView: View {
     }
 }
 
-/// 琴键盘视图
+/// 琴键盘视图 - 响应式布局
 struct PianoKeyboardView: View {
     let playingIndex: Int?
     let showNotation: Bool
     let onKeyPress: (Int) -> Void
     
     var body: some View {
-        VStack(spacing: 12) {
-            // 低音区
-            PianoKeyRow(
-                notes: Array(Note.allNotes[0..<8]),
-                playingIndex: playingIndex,
-                showNotation: showNotation,
-                onKeyPress: onKeyPress
-            )
-            
-            // 高音区
-            PianoKeyRow(
-                notes: Array(Note.allNotes[8..<16]),
-                playingIndex: playingIndex.map { $0 - 8 },
-                showNotation: showNotation,
-                onKeyPress: { index in onKeyPress(index + 8) }
+        GeometryReader { geometry in
+            VStack(spacing: adaptiveSpacing(for: geometry.size)) {
+                // 低音区
+                PianoKeyRow(
+                    notes: Array(Note.allNotes[0..<8]),
+                    playingIndex: playingIndex,
+                    showNotation: showNotation,
+                    onKeyPress: onKeyPress
+                )
+                
+                // 高音区
+                PianoKeyRow(
+                    notes: Array(Note.allNotes[8..<16]),
+                    playingIndex: playingIndex.map { $0 - 8 },
+                    showNotation: showNotation,
+                    onKeyPress: { index in onKeyPress(index + 8) }
+                )
+            }
+            .padding(adaptivePadding(for: geometry.size))
+            .background(
+                RoundedRectangle(cornerRadius: 24)
+                    .fill(.ultraThinMaterial)
+                    .overlay(
+                        RoundedRectangle(cornerRadius: 24)
+                            .stroke(Color.white.opacity(0.2), lineWidth: 1.5)
+                    )
             )
         }
-        .padding(16)
-        .background(
-            RoundedRectangle(cornerRadius: 24)
-                .fill(.ultraThinMaterial)
-                .overlay(
-                    RoundedRectangle(cornerRadius: 24)
-                        .stroke(Color.white.opacity(0.2), lineWidth: 1.5)
-                )
-        )
+        .frame(height: 180)
+    }
+    
+    private func adaptiveSpacing(for size: CGSize) -> CGFloat {
+        size.width <= 375 ? 8 : 12
+    }
+    
+    private func adaptivePadding(for size: CGSize) -> CGFloat {
+        size.width <= 375 ? 10 : 16
     }
 }
 

@@ -34,11 +34,13 @@ struct CompactGlassButton: View {
                     .font(.system(size: 20, weight: .semibold))
                 
                 Text(title)
-                    .font(.system(size: 12, weight: .semibold, design: .rounded))
+                    .font(.system(size: 11, weight: .semibold, design: .rounded))
+                    .lineLimit(1)
+                    .minimumScaleFactor(0.8)
             }
             .foregroundStyle(.white)
             .frame(maxWidth: .infinity)
-            .frame(height: 64)
+            .frame(minWidth: 70, minHeight: 64)
             .background(
                 RoundedRectangle(cornerRadius: 16)
                     .fill(.ultraThinMaterial)
@@ -81,11 +83,13 @@ struct NotationToggleButton: View {
                 
                 // 下方：固定标签（记谱法）
                 Text(label)
-                    .font(.system(size: 11, weight: .medium, design: .rounded))
+                    .font(.system(size: 10, weight: .medium, design: .rounded))
+                    .lineLimit(1)
+                    .minimumScaleFactor(0.8)
             }
             .foregroundStyle(.white)
             .frame(maxWidth: .infinity)
-            .frame(height: 64)
+            .frame(minWidth: 70, minHeight: 64)
             .background(
                 RoundedRectangle(cornerRadius: 16)
                     .fill(.ultraThinMaterial)

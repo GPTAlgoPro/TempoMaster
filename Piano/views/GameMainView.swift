@@ -425,19 +425,26 @@ struct GameMainView: View {
     @ViewBuilder
     private func featureButton(icon: String, title: String, color: Color, action: @escaping () -> Void) -> some View {
         Button(action: action) {
-            HStack {
+            HStack(spacing: 12) {
                 Image(systemName: icon)
                     .font(.system(size: 20, weight: .semibold))
+                    .frame(width: 24)
+                
                 Text(title)
                     .font(.system(size: 16, weight: .semibold, design: .rounded))
-                Spacer()
+                    .lineLimit(1)
+                    .minimumScaleFactor(0.8)
+                
+                Spacer(minLength: 8)
+                
                 Image(systemName: "chevron.right")
                     .font(.system(size: 14, weight: .semibold))
                     .foregroundStyle(.white.opacity(0.5))
             }
             .foregroundStyle(.white)
-            .padding(.horizontal, 20)
+            .padding(.horizontal, 16)
             .padding(.vertical, 16)
+            .frame(minHeight: 54)
             .background(
                 RoundedRectangle(cornerRadius: 16)
                     .fill(color.opacity(0.2))
@@ -493,7 +500,7 @@ struct GameMainView: View {
                 .padding(.horizontal, 20)
                 
                 // 按钮
-                HStack(spacing: 16) {
+                HStack(spacing: 12) {
                     Button(action: {
                         withAnimation {
                             currentView = .menu
@@ -502,9 +509,12 @@ struct GameMainView: View {
                     }) {
                         Text(localization.localized("game.mode.cancel"))
                             .font(.system(size: 16, weight: .semibold, design: .rounded))
+                            .lineLimit(1)
+                            .minimumScaleFactor(0.8)
                             .foregroundStyle(.white)
                             .frame(maxWidth: .infinity)
                             .padding(.vertical, 16)
+                            .frame(minHeight: 50)
                             .background(
                                 RoundedRectangle(cornerRadius: 12)
                                     .fill(.white.opacity(0.1))
@@ -516,9 +526,12 @@ struct GameMainView: View {
                     }) {
                         Text(localization.localized("game.mode.start"))
                             .font(.system(size: 16, weight: .semibold, design: .rounded))
+                            .lineLimit(1)
+                            .minimumScaleFactor(0.8)
                             .foregroundStyle(.white)
                             .frame(maxWidth: .infinity)
                             .padding(.vertical, 16)
+                            .frame(minHeight: 50)
                             .background(
                                 RoundedRectangle(cornerRadius: 12)
                                     .fill(.cyan.opacity(0.3))
@@ -529,7 +542,7 @@ struct GameMainView: View {
                             )
                     }
                 }
-                .padding(.horizontal, 20)
+                .padding(.horizontal, 16)
             }
             .padding(40)
         }

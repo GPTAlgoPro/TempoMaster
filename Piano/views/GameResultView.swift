@@ -183,17 +183,22 @@ struct GameResultView: View {
     
     // MARK: - 按钮区域
     private var buttonsSection: some View {
-        VStack(spacing: 16) {
+        VStack(spacing: 12) {
             Button(action: onRestart) {
-                HStack {
+                HStack(spacing: 12) {
                     Image(systemName: "arrow.clockwise")
                         .font(.system(size: 20, weight: .semibold))
+                        .frame(width: 24)
+                    
                     Text(localization.localized("game.result.play.again"))
-                        .font(.system(size: 18, weight: .semibold, design: .rounded))
+                        .font(.system(size: 17, weight: .semibold, design: .rounded))
+                        .lineLimit(1)
+                        .minimumScaleFactor(0.8)
                 }
                 .foregroundStyle(.white)
                 .frame(maxWidth: .infinity)
                 .padding(.vertical, 16)
+                .frame(minHeight: 54)
                 .background(
                     RoundedRectangle(cornerRadius: 16)
                         .fill(.cyan.opacity(0.3))
@@ -206,15 +211,20 @@ struct GameResultView: View {
             .buttonStyle(.plain)
             
             Button(action: onExit) {
-                HStack {
+                HStack(spacing: 12) {
                     Image(systemName: "house.fill")
                         .font(.system(size: 20, weight: .semibold))
+                        .frame(width: 24)
+                    
                     Text(localization.localized("game.result.back.to.menu"))
-                        .font(.system(size: 18, weight: .semibold, design: .rounded))
+                        .font(.system(size: 17, weight: .semibold, design: .rounded))
+                        .lineLimit(1)
+                        .minimumScaleFactor(0.8)
                 }
                 .foregroundStyle(.white)
                 .frame(maxWidth: .infinity)
                 .padding(.vertical, 16)
+                .frame(minHeight: 54)
                 .background(
                     RoundedRectangle(cornerRadius: 16)
                         .fill(.white.opacity(0.1))

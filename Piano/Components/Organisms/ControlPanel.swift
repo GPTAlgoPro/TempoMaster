@@ -1,105 +1,136 @@
 import SwiftUI
 
-/// 主控制面板 - 有机组件 - 按功能分组合理布局
+/// 主控制面板 - 有机组件 - 按功能分组合理布局 - 响应式设计
 struct ControlPanel: View {
     @ObservedObject var audioManager: AudioManager
     @ObservedObject var appState: AppState
     @ObservedObject private var localizationManager = LocalizationManager.shared
     
     var body: some View {
-        VStack(spacing: 8) {
-            // 第一行：核心功能（音量、曲目、游戏、停止）
-            HStack(spacing: 8) {
-                // 音量按钮
-                CompactGlassButton(
-                    title: "control.volume".localized,
-                    icon: volumeIcon,
-                    tintColor: .cyan,
-                    action: {
-                        appState.showModal(.volumeControl)
-                    }
-                )
-                
-                // 曲目按钮
-                CompactGlassButton(
-                    title: "control.songs".localized,
-                    icon: "music.note.list",
-                    tintColor: .purple,
-                    action: {
-                        appState.showModal(.songMenu)
-                    }
-                )
-                
-                // 游戏按钮
-                CompactGlassButton(
-                    title: "control.game".localized,
-                    icon: "gamecontroller.fill",
-                    tintColor: .green,
-                    action: {
-                        appState.showModal(.game)
-                    }
-                )
-                
-                // 停止按钮
-                CompactGlassButton(
-                    title: "control.stop".localized,
-                    icon: "stop.circle.fill",
-                    tintColor: .blue,
-                    action: {
-                        appState.stopAll()
-                        audioManager.stopAll()
-                    }
-                )
-            }
-            
-            // 第二行：音效和视觉设置（音效、简谱切换、外观）
-            HStack(spacing: 8) {
-                // 音效按钮
-                CompactGlassButton(
-                    title: "control.effect".localized,
-                    icon: effectIcon,
-                    tintColor: effectColor,
-                    action: {
-                        appState.showModal(.effectControl)
-                    }
-                )
-                
-                // 记谱法切换按钮 - 上方显示ABC/123，下方显示"记谱法"标签
-                NotationToggleButton(
-                    statusText: appState.showNotation ? "123" : "ABC",
-                    label: "control.notation".localized,
-                    icon: appState.showNotation ? "textformat.123" : "textformat.abc",
-                    tintColor: appState.showNotation ? .green : .gray,
-                    action: {
-                        withAnimation {
-                            appState.showNotation.toggle()
+        GeometryReader { geometry in
+            VStack(spacing: adaptiveSpacing(for: geometry.size)) {
+                // 第一行：核心功能（音量、曲目、游戏、停止）
+                HStack(spacing: adaptiveSpacing(for: geometry.size)) {
+                    // 音量按钮
+                    CompactGlassButton(
+                        title: "control.volume".localized,
+                        icon: volumeIcon,
+                        tintColor: .cyan,
+                        action: {
+                            appState.showModal(.volumeControl)
                         }
-                    }
-                )
+                    )
+                    .frame(maxWidth: .infinity)
+                    
+                    // 曲目按钮
+                    CompactGlassButton(
+                        title: "control.songs".localized,
+                        icon: "music.note.list",
+                        tintColor: .purple,
+                        action: {
+                            appState.showModal(.songMenu)
+                        }
+                    )
+                    .frame(maxWidth: .infinity)
+                    
+                    // 游戏按钮
+                    CompactGlassButton(
+                        title: "control.game".localized,
+                        icon: "gamecontroller.fill",
+                        tintColor: .green,
+                        action: {
+                            appState.showModal(.game)
+                        }
+                    )
+                    .frame(maxWidth: .infinity)
+                    
+                    // 停止按钮
+                    CompactGlassButton(
+                        title: "control.stop".localized,
+                        icon: "stop.circle.fill",
+                        tintColor: .blue,
+                        action: {
+                            appState.stopAll()
+                            audioManager.stopAll()
+                        }
+                    )
+                    .frame(maxWidth: .infinity)
+                }
                 
-                // 外观设置按钮
-                CompactGlassButton(
-                    title: "control.skin".localized,
-                    icon: "paintpalette.fill",
-                    tintColor: .pink,
-                    action: {
-                        appState.showModal(.skinSettings)
-                    }
-                )
-                
-                // 语言切换按钮
-                CompactGlassButton(
-                    title: "control.language".localized,
-                    icon: "globe",
-                    tintColor: .orange,
-                    action: {
-                        appState.showModal(.languageSettings)
-                    }
-                )
+                // 第二行：音效和视觉设置（音效、简谱切换、外观）
+                HStack(spacing: adaptiveSpacing(for: geometry.size)) {
+                    // 音效按钮
+                    CompactGlassButton(
+                        title: "control.effect".localized,
+                        icon: effectIcon,
+                        tintColor: effectColor,
+                        action: {
+                            appState.showModal(.effectControl)
+                        }
+                    )
+                    .frame(maxWidth: .infinity)
+                    
+                    // 记谱法切换按钮 - 上方显示ABC/123，下方显示"记谱法"标签
+                    NotationToggleButton(
+                        statusText: appState.showNotation ? "123" : "ABC",
+                        label: "control.notation".localized,
+                        icon: appState.showNotation ? "textformat.123" : "textformat.abc",
+                        tintColor: appState.showNotation ? .green : .gray,
+                        action: {
+                            withAnimation {
+                                appState.showNotation.toggle()
+                            }
+                        }
+                    )
+                    .frame(maxWidth: .infinity)
+                    
+                    // 外观设置按钮
+                    CompactGlassButton(
+                        title: "control.skin".localized,
+                        icon: "paintpalette.fill",
+                        tintColor: .pink,
+                        action: {
+                            appState.showModal(.skinSettings)
+                        }
+                    )
+                    .frame(maxWidth: .infinity)
+                    
+                    // 语言切换按钮
+                    CompactGlassButton(
+                        title: "control.language".localized,
+                        icon: "globe",
+                        tintColor: .orange,
+                        action: {
+                            appState.showModal(.languageSettings)
+                        }
+                    )
+                    .frame(maxWidth: .infinity)
+                }
             }
+            .padding(.horizontal, adaptivePadding(for: geometry.size))
+            .padding(.vertical, adaptivePadding(for: geometry.size) * 0.75)
         }
-        .padding(.horizontal, 16)
-        .padding(.vertical, 12)
+        .frame(height: 180)
+    }
+    
+    private func adaptiveSpacing(for size: CGSize) -> CGFloat {
+        if size.width < 380 {
+            return 6
+        } else if size.width < 600 {
+            return 8
+        } else {
+            return 12
+        }
+    }
+    
+    private func adaptivePadding(for size: CGSize) -> CGFloat {
+        if size.width < 380 {
+            return 12
+        } else if size.width < 600 {
+            return 16
+        } else {
+            return 24
+        }
     }
     
     private var volumeIcon: String {
@@ -213,7 +244,7 @@ struct VolumeControlPanel: View {
             }
         }
         .padding(24)
-        .frame(width: 340)
+        .frame(maxWidth: min(340, UIScreen.main.bounds.width - 40))
         .background(
             RoundedRectangle(cornerRadius: 28)
                 .fill(.ultraThinMaterial)

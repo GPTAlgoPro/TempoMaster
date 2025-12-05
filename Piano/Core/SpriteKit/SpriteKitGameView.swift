@@ -45,6 +45,7 @@ struct SpriteKitGamePlayView: View {
     @State private var gameScene: GameScene?
     @State private var assistMode = false  // 辅助模式开关
     @State private var highlightedKeys: Set<Int> = []  // 当前应该高亮的按键
+    @State private var pianoKeysHeight: CGFloat = 0  // 琴键区域动态高度
     
     // 缓存的主题颜色 - 避免游戏期间颜色变化
     @State private var cachedThemeColors: ThemeColors?
@@ -229,7 +230,11 @@ struct SpriteKitGamePlayView: View {
     
     // MARK: - 琴键按钮栏（双层布局）
     private var pianoKeysBar: some View {
-        GeometryReader { geometry in
+        GeometryReader { outerGeometry in
+            let keyWidth = outerGeometry.size.width / 7.0
+            let keyHeight = keyWidth  // 1:1 宽高比
+            let totalHeight = keyHeight * 2 + 8  // 两排琴键 + 光效条高度
+            
             VStack(spacing: 0) {
                 // 装饰性律动光效层
                 rhythmicLightBar
@@ -237,14 +242,26 @@ struct SpriteKitGamePlayView: View {
                 // 琴键区域
                 HStack(spacing: 0) { // 移除固定间距，改为0让琴键紧贴
                     ForEach(0..<7, id: \.self) { index in
-                        dualLayerPianoKey(baseIndex: index, screenWidth: geometry.size.width)
+                        dualLayerPianoKey(baseIndex: index, keyWidth: keyWidth)
                     }
                 }
-                .frame(height: 120)  // 调整琴键高度，实现3:2的高宽比
+                .frame(height: keyHeight * 2)  // 动态计算高度：两排琴键，1:1宽高比
                 .background(.ultraThinMaterial)
             }
+            .frame(height: totalHeight, alignment: .bottom)  // 固定总高度并底部对齐
+            .onAppear {
+                // 首次计算并保存琴键区域高度
+                if pianoKeysHeight == 0 {
+                    pianoKeysHeight = totalHeight
+                }
+            }
+            .onChange(of: outerGeometry.size.width) { oldValue, newValue in
+                // 屏幕宽度变化时重新计算高度
+                let newKeyWidth = newValue / 7.0
+                pianoKeysHeight = newKeyWidth * 2 + 8
+            }
         }
-        .frame(height: 128) // 120 + 8 (光效条高度)
+        .frame(height: pianoKeysHeight > 0 ? pianoKeysHeight : 150)  // 使用动态计算的高度，初始值150
     }
     
     // MARK: - 律动光效条
@@ -296,7 +313,7 @@ struct SpriteKitGamePlayView: View {
         .frame(height: 8)
     }
     
-    private func dualLayerPianoKey(baseIndex: Int, screenWidth: CGFloat) -> some View {
+    private func dualLayerPianoKey(baseIndex: Int, keyWidth: CGFloat) -> some View {
         let normalIndex = baseIndex  // 0-6 对应正常音 1234567
         let highIndex = baseIndex + 8  // 8-14 对应高音 1̇2̇3̇4̇5̇6̇7̇
         
@@ -309,9 +326,6 @@ struct SpriteKitGamePlayView: View {
         ]
         
         let baseColor = rainbowColors[baseIndex]
-        
-        // 动态计算每个琴键的宽度，确保填满整个屏幕宽度
-        let keyWidth = screenWidth / 7.0
         
         return VStack(spacing: 0) {
             // 上半部分：中音区 - 正常亮度的彩虹色
@@ -341,7 +355,7 @@ struct SpriteKitGamePlayView: View {
                         .foregroundColor(.white)
                         .shadow(color: .black.opacity(0.5), radius: 2, x: 0, y: 1)
                 }
-                .frame(width: keyWidth, height: keyWidth * 1.5) // 明确设置宽度和1.5倍高度(3:2比例)
+                .frame(width: keyWidth, height: keyWidth) // 1:1 宽高比
             }
             .buttonStyle(.plain)
             
@@ -377,7 +391,7 @@ struct SpriteKitGamePlayView: View {
                     }
                     .shadow(color: .black.opacity(0.5), radius: 2, x: 0, y: 1)
                 }
-                .frame(width: keyWidth, height: keyWidth * 1.5) // 明确设置宽度和1.5倍高度(3:2比例)
+                .frame(width: keyWidth, height: keyWidth) // 1:1 宽高比
             }
             .buttonStyle(.plain)
         }

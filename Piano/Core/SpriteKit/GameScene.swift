@@ -78,10 +78,30 @@ class GameScene: SKScene {
         return rainbowColors[index]
     }
     
-    /// 设置判定线
+    /// 设置判定线 - 根据屏幕比例自适应位置
     private func setupJudgementLine() {
-        // 设置判定线位置为距离屏幕底部33%的位置
-        judgementLineY = size.height * 0.33  // 33%的位置，即距离底部67%
+        // 根据屏幕高宽比计算最优判定线位置
+        let aspectRatio = size.height / size.width
+        
+        // 计算判定线位置百分比（距离底部）
+        // 原则：垂直空间越紧张（4:3），判定线应该越往上（离底部越远），保证游戏空间
+        let linePositionPercent: CGFloat
+        
+        if aspectRatio > 2.0 {
+            // 超长屏幕（iPhone）- 垂直空间充足，判定线可以较低
+            linePositionPercent = 0.30  // 30%
+        } else if aspectRatio > 1.6 {
+            // 标准 iPhone/iPad Pro - 垂直空间正常
+            linePositionPercent = 0.33  // 33%
+        } else if aspectRatio > 1.4 {
+            // iPad Air - 垂直空间开始紧张，判定线需要提高
+            linePositionPercent = 0.36  // 36%
+        } else {
+            // iPad mini/iPad (4:3) - 垂直空间最紧张，判定线必须更高以保证游戏空间
+            linePositionPercent = 0.40  // 40%
+        }
+        
+        judgementLineY = size.height * linePositionPercent
         
         // 创建美化版判定线
         optimizedJudgementLine = OptimizedJudgementLineNode()
@@ -91,7 +111,7 @@ class GameScene: SKScene {
             addChild(judgementLine)
         }
         
-        print("🎯 判定线设置在距离底部33%的位置: Y = \(judgementLineY) (屏幕高度: \(size.height))")
+        print("🎯 判定线自适应位置: Y = \(judgementLineY) (屏幕高度: \(size.height), 比例: \(aspectRatio), 百分比: \(linePositionPercent * 100)%)")
     }
     
     // MARK: - 游戏控制
