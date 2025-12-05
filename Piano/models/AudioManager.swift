@@ -4,6 +4,8 @@ import UIKit
 
 /// 音频管理器 - 负责生成和播放音符
 final class AudioManager: ObservableObject {
+    static let shared = AudioManager()
+    
     private let audioEngine = AVAudioEngine()
     private var playerNodes: [AVAudioPlayerNode] = []
     private var isEngineRunning = false

@@ -2,7 +2,7 @@ import SwiftUI
 
 /// 重构后的主视图 - 清晰的架构
 struct PianoMainView: View {
-    @StateObject private var audioManager = AudioManager()
+    @StateObject private var audioManager = AudioManager.shared
     @StateObject private var appState = AppState.shared
     @StateObject private var themeManager = ThemeManager.shared
     @ObservedObject private var localizationManager = LocalizationManager.shared

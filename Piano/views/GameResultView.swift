@@ -80,7 +80,7 @@ struct GameResultView: View {
                 .foregroundStyle(.white)
             
             // 难度
-            Text(record.mode.rawValue)
+            Text(record.mode.localizedName)
                 .font(.system(size: 16, weight: .semibold, design: .rounded))
                 .foregroundStyle(.cyan)
                 .padding(.horizontal, 16)

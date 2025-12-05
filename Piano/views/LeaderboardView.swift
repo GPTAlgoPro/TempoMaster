@@ -274,7 +274,7 @@ struct LeaderboardView: View {
                     .foregroundStyle(.white)
                 
                 HStack(spacing: 8) {
-                    Text(record.mode.rawValue)
+                    Text(record.mode.localizedName)
                         .font(.system(size: 12, weight: .medium, design: .rounded))
                         .foregroundStyle(.cyan)
                     
