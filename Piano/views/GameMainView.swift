@@ -24,55 +24,22 @@ struct GameMainView: View {
     }
     
     var body: some View {
-        ZStack {
-            // 强制黑色背景作为最底层，覆盖所有可能的父视图背景
-            Color.black
-                .ignoresSafeArea()
-                .zIndex(-1)
-            
-            // 内容层
-            Group {
-                switch currentView {
-                case .menu:
-                    mainMenuView
-                        .transition(.opacity)
-                    
-                case .modeSelection:
-                    if let song = selectedSong {
-                        modeSelectionView(song: song)
-                            .transition(.move(edge: .bottom).combined(with: .opacity))
-                    }
-                    
-                case .playing:
-                    if let song = selectedSong {
-                        // 使用SpriteKit + SwiftUI架构，包含倒计时
-                        CountdownGameView(
-                            song: song,
-                            mode: selectedMode,
-                            audioManager: audioManager,
-                            onExit: {
-                                handleGameExit()
-                            }
-                        )
-                        .transition(.opacity)
-                    }
-                    
-                case .result:
-                    if let record = lastRecord {
-                        GameResultView(
-                            record: record,
-                            onRestart: {
-                                restartGame()
-                            },
-                            onExit: {
-                                withAnimation {
-                                    currentView = .menu
-                                    lastRecord = nil
-                                }
-                            }
-                        )
-                        .transition(.move(edge: .trailing).combined(with: .opacity))
-                    }
+        GeometryReader { geometry in
+            ZStack {
+                // 强制黑色背景作为最底层，覆盖所有可能的父视图背景
+                Color.black
+                    .ignoresSafeArea()
+                    .zIndex(-1)
+                
+                // 内容层 - 仅 iPad 锁定宽高比
+                if UIDevice.current.userInterfaceIdiom == .pad {
+                    // iPad: 锁定设备原生宽高比
+                    contentLayer
+                        .aspectRatio(nativeAspectRatio, contentMode: .fit)
+                        .frame(maxWidth: .infinity, maxHeight: .infinity)
+                } else {
+                    // iPhone: 保持全屏显示
+                    contentLayer
                 }
             }
         }
@@ -82,6 +49,62 @@ struct GameMainView: View {
         }
         .sheet(isPresented: $showLeaderboard) {
             LeaderboardView()
+        }
+    }
+    
+    /// 获取当前设备的原生屏幕宽高比（竖屏状态下的比例）
+    private var nativeAspectRatio: CGFloat {
+        let screen = UIScreen.main.bounds
+        let width = min(screen.width, screen.height)  // 竖屏时的宽度
+        let height = max(screen.width, screen.height) // 竖屏时的高度
+        return width / height
+    }
+    
+    /// 内容层视图
+    private var contentLayer: some View {
+        Group {
+            switch currentView {
+            case .menu:
+                mainMenuView
+                    .transition(.opacity)
+                
+            case .modeSelection:
+                if let song = selectedSong {
+                    modeSelectionView(song: song)
+                        .transition(.move(edge: .bottom).combined(with: .opacity))
+                }
+                
+            case .playing:
+                if let song = selectedSong {
+                    // 使用SpriteKit + SwiftUI架构，包含倒计时
+                    CountdownGameView(
+                        song: song,
+                        mode: selectedMode,
+                        audioManager: audioManager,
+                        onExit: {
+                            handleGameExit()
+                        }
+                    )
+                    .transition(.opacity)
+                }
+                
+            case .result:
+                if let record = lastRecord {
+                    GameResultView(
+                        record: record,
+                        onRestart: {
+                            restartGame()
+                        },
+                        onExit: {
+                            withAnimation {
+                                currentView = .menu
+                                lastRecord = nil
+                            }
+                        }
+                    )
+                    .transition(.move(edge: .trailing).combined(with: .opacity))
+                }
+            }
         }
     }
     
