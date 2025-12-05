@@ -47,8 +47,11 @@ struct PianoMainView: View {
         GeometryReader { geometry in
             VStack(spacing: 0) {
                 // 1. 顶部标题
-                HeaderView(currentSong: appState.currentSong)
-                    .padding(.top, geometry.safeAreaInsets.top + 8)
+                HeaderView(
+                    currentSong: appState.currentSong,
+                    audioManager: audioManager
+                )
+                .padding(.top, geometry.safeAreaInsets.top + 8)
                 
                 // 2. 上方灵活间隔
                 Spacer()
@@ -270,6 +273,7 @@ struct PianoMainView: View {
 /// 标题视图 - 可点击进入关于页面
 struct HeaderView: View {
     let currentSong: Song?
+    let audioManager: AudioManager
     @ObservedObject private var themeManager = ThemeManager.shared
     @ObservedObject private var localizationManager = LocalizationManager.shared
     @ObservedObject private var appState = AppState.shared
@@ -280,6 +284,12 @@ struct HeaderView: View {
             // 触觉反馈
             let generator = UIImpactFeedbackGenerator(style: .light)
             generator.impactOccurred()
+            
+            // 重置播放状态（如果正在播放歌曲）
+            if appState.isPlayingSong {
+                appState.stopAll()
+                audioManager.stopAll()
+            }
             
             // 显示关于页面
             withAnimation(.spring(response: 0.4, dampingFraction: 0.8)) {
