@@ -17,8 +17,14 @@ class AppDelegate: NSObject, UIApplicationDelegate {
         _ application: UIApplication,
         supportedInterfaceOrientationsFor window: UIWindow?
     ) -> UIInterfaceOrientationMask {
-        // 锁定为仅竖屏模式
-        return .portrait
+        // iPhone 仅支持竖屏，iPad 支持所有方向
+        if UIDevice.current.userInterfaceIdiom == .pad {
+            // iPad: 支持所有方向（审核要求）
+            return .all
+        } else {
+            // iPhone: 仅支持竖屏
+            return .portrait
+        }
     }
     
     // MARK: - 应用进入后台

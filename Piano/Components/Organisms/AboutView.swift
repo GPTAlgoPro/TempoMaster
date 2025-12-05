@@ -35,30 +35,40 @@ struct AboutView: View {
                 }
             
             // 主内容
-            VStack(spacing: 0) {
-                // 顶部装饰和导航
-                topNavigation
-                
-                // 内容区域
-                ScrollView {
-                    VStack(spacing: 0) {
-                        // App图标和基本信息
-                        appHeader
-                        
-                        // 分段控制器
-                        sectionSelector
-                        
-                        // 动态内容区域
-                        dynamicContent
-                        
-                        // 底部按钮
-                        closeButton
+            GeometryReader { geometry in
+                VStack(spacing: 0) {
+                    // 顶部装饰和导航
+                    topNavigation
+                    
+                    // 内容区域
+                    ScrollView {
+                        VStack(spacing: 0) {
+                            // App图标和基本信息
+                            appHeader
+                            
+                            // 分段控制器
+                            sectionSelector
+                            
+                            // 动态内容区域
+                            dynamicContent
+                            
+                            // 底部按钮
+                            closeButton
+                        }
+                        .padding(.vertical, 20)
                     }
-                    .padding(.vertical, 20)
+                    .frame(height: contentHeight(for: geometry.size))
                 }
-                .frame(height: 550)
+                .frame(
+                    width: dialogWidth(for: geometry.size),
+                    height: dialogHeight(for: geometry.size)
+                )
+                .frame(maxWidth: .infinity, maxHeight: .infinity)
             }
-            .frame(width: 400, height: 700)
+            .frame(
+                width: UIDevice.current.userInterfaceIdiom == .pad ? 400 : nil,
+                height: UIDevice.current.userInterfaceIdiom == .pad ? 700 : nil
+            )
             .background(
                 RoundedRectangle(cornerRadius: 32)
                     .fill(.ultraThinMaterial)
@@ -80,6 +90,39 @@ struct AboutView: View {
             .shadow(color: .black.opacity(0.3), radius: 30, x: 0, y: 15)
         }
         .transition(.scale(scale: 0.9).combined(with: .opacity))
+    }
+    
+    // MARK: - 自适应尺寸计算
+    
+    /// 计算对话框宽度
+    private func dialogWidth(for screenSize: CGSize) -> CGFloat {
+        if UIDevice.current.userInterfaceIdiom == .pad {
+            return 400
+        } else {
+            // iPhone: 使用屏幕宽度的 90%，最大 380
+            return min(screenSize.width * 0.9, 380)
+        }
+    }
+    
+    /// 计算对话框高度
+    private func dialogHeight(for screenSize: CGSize) -> CGFloat {
+        if UIDevice.current.userInterfaceIdiom == .pad {
+            return 700
+        } else {
+            // iPhone: 使用屏幕高度的 85%，最大 700
+            return min(screenSize.height * 0.85, 700)
+        }
+    }
+    
+    /// 计算内容区域高度
+    private func contentHeight(for screenSize: CGSize) -> CGFloat {
+        if UIDevice.current.userInterfaceIdiom == .pad {
+            return 550
+        } else {
+            // iPhone: 根据对话框高度动态计算
+            let dialogH = dialogHeight(for: screenSize)
+            return dialogH - 150 // 减去顶部导航等固定高度
+        }
     }
     
     // MARK: - 顶部导航

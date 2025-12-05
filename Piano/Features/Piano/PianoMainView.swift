@@ -8,17 +8,35 @@ struct PianoMainView: View {
     @ObservedObject private var localizationManager = LocalizationManager.shared
     
     var body: some View {
-        ZStack {
-            // 背景层
-            backgroundLayer
-            
-            // 主内容层
-            mainContentLayer
-            
-            // 模态弹窗层
-            modalLayer
+        GeometryReader { outerGeometry in
+            ZStack {
+                // 背景层 - 填满整个屏幕
+                backgroundLayer
+                
+                // 主内容层 - 仅 iPad 锁定宽高比
+                if UIDevice.current.userInterfaceIdiom == .pad {
+                    // iPad: 锁定设备原生宽高比
+                    mainContentLayer
+                        .aspectRatio(nativeAspectRatio, contentMode: .fit)
+                        .frame(maxWidth: .infinity, maxHeight: .infinity)
+                } else {
+                    // iPhone: 保持全屏显示
+                    mainContentLayer
+                }
+                
+                // 模态弹窗层
+                modalLayer
+            }
         }
         .preferredColorScheme(.none) // 使用系统自动模式
+    }
+    
+    /// 获取当前设备的原生屏幕宽高比（竖屏状态下的比例）
+    private var nativeAspectRatio: CGFloat {
+        let screen = UIScreen.main.bounds
+        let width = min(screen.width, screen.height)  // 竖屏时的宽度
+        let height = max(screen.width, screen.height) // 竖屏时的高度
+        return width / height
     }
     
     // MARK: - 背景层
