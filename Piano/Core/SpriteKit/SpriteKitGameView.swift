@@ -133,13 +133,17 @@ struct SpriteKitGamePlayView: View {
             // 设置游戏完成回调
             setupGameCompletionCallback()
             
-            // 延迟启动游戏，确保场景已初始化
-            DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
-                startGame()
+            // 先安全停止所有音频，再延迟启动游戏
+            audioManager.safeStopAllAudio {
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
+                    startGame()
+                }
             }
         }
         .onDisappear {
+            // 安全停止游戏和音频
             stopGame()
+            audioManager.safeStopAllAudio()
             themeManager.exitGameMode()
         }
     }
@@ -655,24 +659,28 @@ struct SpriteKitGamePlayView: View {
         
         if showPauseMenu {
             gameScene?.pauseGame()
-            audioManager.stopSong()
+            // 安全停止音频
+            audioManager.safeStopAllAudio()
             viewModel.pauseGame()
         } else {
             gameScene?.resumeGame()
-            // 恢复时重新启动音频
-            audioManager.playSong(
-                song,
-                notes: Note.allNotes,
-                onNotePlay: { _ in },
-                onComplete: { }
-            )
+            // 安全停止后再恢复音频
+            audioManager.safeStopAllAudio {
+                self.audioManager.playSong(
+                    self.song,
+                    notes: Note.allNotes,
+                    onNotePlay: { _ in },
+                    onComplete: { }
+                )
+            }
             viewModel.resumeGame()
         }
     }
     
     private func stopGame() {
         gameScene?.stopGame()
-        audioManager.stopSong()
+        // 安全停止所有音频
+        audioManager.safeStopAllAudio()
         viewModel.stopGame()
     }
     

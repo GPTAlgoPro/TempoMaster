@@ -22,24 +22,28 @@ struct ControlPanel: View {
                     )
                     .frame(maxWidth: .infinity)
                     
-                    // 曲目按钮
+                    // 曲目按钮 - 先停止音频再打开
                     CompactGlassButton(
                         title: "control.songs".localized,
                         icon: "music.note.list",
                         tintColor: .purple,
                         action: {
-                            appState.showModal(.songMenu)
+                            audioManager.safeStopAllAudio {
+                                appState.showModal(.songMenu)
+                            }
                         }
                     )
                     .frame(maxWidth: .infinity)
                     
-                    // 游戏按钮
+                    // 游戏按钮 - 先停止音频再打开
                     CompactGlassButton(
                         title: "control.game".localized,
                         icon: "gamecontroller.fill",
                         tintColor: .green,
                         action: {
-                            appState.showModal(.game)
+                            audioManager.safeStopAllAudio {
+                                appState.showModal(.game)
+                            }
                         }
                     )
                     .frame(maxWidth: .infinity)
@@ -59,13 +63,15 @@ struct ControlPanel: View {
                 
                 // 第二行：音效和视觉设置（音效、简谱切换、外观）
                 HStack(spacing: adaptiveSpacing(for: geometry.size)) {
-                    // 音效按钮
+                    // 音效按钮 - 先停止音频再打开
                     CompactGlassButton(
                         title: "control.effect".localized,
                         icon: effectIcon,
                         tintColor: effectColor,
                         action: {
-                            appState.showModal(.effectControl)
+                            audioManager.safeStopAllAudio {
+                                appState.showModal(.effectControl)
+                            }
                         }
                     )
                     .frame(maxWidth: .infinity)

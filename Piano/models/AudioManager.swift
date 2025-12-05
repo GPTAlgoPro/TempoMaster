@@ -22,6 +22,16 @@ final class AudioManager: ObservableObject {
     private var songScheduler: SongScheduler?
     private var isPlayingSong = false
     
+    // 音频播放状态监听 - 新增
+    @Published var isPlaying = false {
+        didSet {
+            print("🎵 音频播放状态变更: \(isPlaying)")
+        }
+    }
+    
+    // 音频停止锁 - 防止并发冲突
+    private let stopLock = NSLock()
+    
     /// 音频效果类型
     enum AudioEffect: String, CaseIterable {
         case none = "原声"
@@ -84,37 +94,72 @@ final class AudioManager: ObservableObject {
         }
     }
     
+    // MARK: - 安全停止所有音频（供外部调用）
+    func safeStopAllAudio(completion: (() -> Void)? = nil) {
+        stopLock.lock()
+        defer { stopLock.unlock() }
+        
+        print("🛑 安全停止所有音频...")
+        
+        // 1. 停止歌曲调度器
+        songScheduler?.stop()
+        songScheduler = nil
+        isPlayingSong = false
+        
+        // 2. 停止所有播放节点
+        for playerNode in playerNodes {
+            playerNode.stop()
+        }
+        
+        // 3. 分离所有播放节点
+        safeDetachAllPlayerNodes()
+        
+        // 4. 清空数组
+        playerNodes.removeAll()
+        
+        // 5. 更新播放状态
+        isPlaying = false
+        
+        // 6. 短暂延迟确保音频完全停止
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+            completion?()
+            print("✅ 所有音频已安全停止")
+        }
+    }
+    
     // MARK: - 切换音频效果（安全版本 - 优化版）
     func nextEffect() {
         print("🔄 切换音效...")
         
-        // 1. 完全停止所有音频
-        stopAll()
-        
-        // 2. 确保音频引擎处于完全停止状态
-        if audioEngine.isRunning {
-            audioEngine.stop()
-            isEngineRunning = false
-            print("✅ 音频引擎已停止")
+        // 1. 安全停止所有音频，等待完成后再切换
+        safeStopAllAudio { [weak self] in
+            guard let self = self else { return }
+            
+            // 2. 确保音频引擎处于完全停止状态
+            if self.audioEngine.isRunning {
+                self.audioEngine.stop()
+                self.isEngineRunning = false
+                print("✅ 音频引擎已停止")
+            }
+            
+            // 3. 重置音频引擎连接
+            self.audioEngine.reset()
+            
+            let allEffects = AudioEffect.allCases
+            guard let currentIndex = allEffects.firstIndex(of: self.currentEffect) else { return }
+            
+            let nextIndex = (currentIndex + 1) % allEffects.count
+            let nextEffect = allEffects[nextIndex]
+            
+            // 4. 直接切换效果
+            self.currentEffect = nextEffect
+            
+            print("✅ 音效已切换到: \(nextEffect.rawValue)")
+            
+            // 5. 触觉反馈
+            let impactFeedback = UIImpactFeedbackGenerator(style: .medium)
+            impactFeedback.impactOccurred()
         }
-        
-        // 3. 重置音频引擎连接
-        audioEngine.reset()
-        
-        let allEffects = AudioEffect.allCases
-        guard let currentIndex = allEffects.firstIndex(of: currentEffect) else { return }
-        
-        let nextIndex = (currentIndex + 1) % allEffects.count
-        let nextEffect = allEffects[nextIndex]
-        
-        // 4. 直接切换效果
-        currentEffect = nextEffect
-        
-        print("✅ 音效已切换到: \(nextEffect.rawValue)")
-        
-        // 5. 触觉反馈
-        let impactFeedback = UIImpactFeedbackGenerator(style: .medium)
-        impactFeedback.impactOccurred()
     }
     
     // MARK: - 暂停音频引擎（用于配置更改）- 优化版
@@ -327,6 +372,9 @@ final class AudioManager: ObservableObject {
         }
         playerNodes.append(playerNode)
         
+        // 更新播放状态
+        isPlaying = true
+        
         // 只在手动演奏时触发触觉反馈
         if scheduledTime == nil {
             let impactFeedback = UIImpactFeedbackGenerator(style: .heavy)
@@ -348,34 +396,37 @@ final class AudioManager: ObservableObject {
     
     // MARK: - 歌曲播放支持（高精度调度）
     func playSong(_ song: Song, notes: [Note], onNotePlay: @escaping (Int) -> Void, onComplete: @escaping () -> Void) {
-        // 停止之前的播放
-        stopSong()
-        
-        // 预加载所有需要的音符
-        let uniqueNoteIndices = Set(song.notes)
-        let notesToPreload = notes.filter { uniqueNoteIndices.contains($0.index) }
-        preloadBuffers(for: notesToPreload)
-        
-        // 确保引擎正在运行
-        startEngineIfNeeded()
-        
-        // 创建歌曲调度器
-        let scheduler = SongScheduler(
-            audioEngine: audioEngine,
-            song: song,
-            notes: notes,
-            audioManager: self,
-            onNotePlay: onNotePlay,
-            onComplete: onComplete
-        )
-        
-        self.songScheduler = scheduler
-        self.isPlayingSong = true
-        
-        // 开始调度
-        scheduler.start()
-        
-        print("🎼 开始播放歌曲: \(song.name), BPM: \(song.bpm)")
+        // 安全停止之前的播放
+        safeStopAllAudio { [weak self] in
+            guard let self = self else { return }
+            
+            // 预加载所有需要的音符
+            let uniqueNoteIndices = Set(song.notes)
+            let notesToPreload = notes.filter { uniqueNoteIndices.contains($0.index) }
+            self.preloadBuffers(for: notesToPreload)
+            
+            // 确保引擎正在运行
+            self.startEngineIfNeeded()
+            
+            // 创建歌曲调度器
+            let scheduler = SongScheduler(
+                audioEngine: self.audioEngine,
+                song: song,
+                notes: notes,
+                audioManager: self,
+                onNotePlay: onNotePlay,
+                onComplete: onComplete
+            )
+            
+            self.songScheduler = scheduler
+            self.isPlayingSong = true
+            self.isPlaying = true
+            
+            // 开始调度
+            scheduler.start()
+            
+            print("🎼 开始播放歌曲: \(song.name), BPM: \(song.bpm)")
+        }
     }
     
     // MARK: - 停止歌曲播放
@@ -455,32 +506,10 @@ final class AudioManager: ObservableObject {
         !playerNodes.isEmpty
     }
     
-    // MARK: - 停止所有声音（增强版）
+    // MARK: - 停止所有声音（增强版 - 保留向后兼容）
     func stopAll() {
-        print("🛑 停止所有音频播放...")
-        
-        // 1. 首先停止歌曲调度器
-        songScheduler?.stop()
-        songScheduler = nil
-        isPlayingSong = false
-        
-        // 2. 立即停止所有播放器节点
-        for playerNode in playerNodes {
-            playerNode.stop()
-        }
-        
-        // 3. 安全分离所有播放节点
-        safeDetachAllPlayerNodes()
-        
-        // 4. 清空播放器数组
-        playerNodes.removeAll()
-        
-        // 5. 强制重置音频引擎状态
-        if audioEngine.isRunning {
-            audioEngine.reset()
-        }
-        
-        print("✅ 所有音频已停止")
+        // 调用安全停止方法
+        safeStopAllAudio()
     }
     
     // MARK: - 安全分离所有播放节点
