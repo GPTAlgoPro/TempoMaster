@@ -183,12 +183,21 @@ struct GameRecord: Identifiable, Codable {
 // MARK: - 成就
 struct Achievement: Identifiable, Codable {
     let id: String
-    let title: String
-    let description: String
+    let titleKey: String        // 本地化键
+    let descriptionKey: String  // 本地化键
     let icon: String
     var isUnlocked: Bool
     var progress: Double        // 0-1
     let requirement: Int        // 解锁要求
+    
+    // 动态获取本地化文本
+    var title: String {
+        titleKey.localized
+    }
+    
+    var description: String {
+        descriptionKey.localized
+    }
     
     /// 检查是否满足解锁条件
     mutating func checkUnlock(currentValue: Int) -> Bool {
@@ -204,13 +213,13 @@ struct Achievement: Identifiable, Codable {
 // MARK: - 预定义成就
 extension Achievement {
     static let allAchievements: [Achievement] = [
-        Achievement(id: "first_game", title: "achievement.first_game.title".localized, description: "achievement.first_game.description".localized, icon: "star.fill", isUnlocked: false, progress: 0, requirement: 1),
-        Achievement(id: "perfect_10", title: "achievement.perfect_10.title".localized, description: "achievement.perfect_10.description".localized, icon: "flame.fill", isUnlocked: false, progress: 0, requirement: 10),
-        Achievement(id: "combo_50", title: "achievement.combo_50.title".localized, description: "achievement.combo_50.description".localized, icon: "bolt.fill", isUnlocked: false, progress: 0, requirement: 50),
-        Achievement(id: "full_combo", title: "achievement.full_combo.title".localized, description: "achievement.full_combo.description".localized, icon: "crown.fill", isUnlocked: false, progress: 0, requirement: 1),
-        Achievement(id: "play_100", title: "achievement.play_100.title".localized, description: "achievement.play_100.description".localized, icon: "music.note", isUnlocked: false, progress: 0, requirement: 100),
-        Achievement(id: "expert_clear", title: "achievement.expert_clear.title".localized, description: "achievement.expert_clear.description".localized, icon: "trophy.fill", isUnlocked: false, progress: 0, requirement: 1),
-        Achievement(id: "sss_rank", title: "achievement.sss_rank.title".localized, description: "achievement.sss_rank.description".localized, icon: "sparkles", isUnlocked: false, progress: 0, requirement: 1)
+        Achievement(id: "first_game", titleKey: "achievement.first_game.title", descriptionKey: "achievement.first_game.description", icon: "star.fill", isUnlocked: false, progress: 0, requirement: 1),
+        Achievement(id: "perfect_10", titleKey: "achievement.perfect_10.title", descriptionKey: "achievement.perfect_10.description", icon: "flame.fill", isUnlocked: false, progress: 0, requirement: 10),
+        Achievement(id: "combo_50", titleKey: "achievement.combo_50.title", descriptionKey: "achievement.combo_50.description", icon: "bolt.fill", isUnlocked: false, progress: 0, requirement: 50),
+        Achievement(id: "full_combo", titleKey: "achievement.full_combo.title", descriptionKey: "achievement.full_combo.description", icon: "crown.fill", isUnlocked: false, progress: 0, requirement: 1),
+        Achievement(id: "play_100", titleKey: "achievement.play_100.title", descriptionKey: "achievement.play_100.description", icon: "music.note", isUnlocked: false, progress: 0, requirement: 100),
+        Achievement(id: "expert_clear", titleKey: "achievement.expert_clear.title", descriptionKey: "achievement.expert_clear.description", icon: "trophy.fill", isUnlocked: false, progress: 0, requirement: 1),
+        Achievement(id: "sss_rank", titleKey: "achievement.sss_rank.title", descriptionKey: "achievement.sss_rank.description", icon: "sparkles", isUnlocked: false, progress: 0, requirement: 1)
     ]
 }
 
